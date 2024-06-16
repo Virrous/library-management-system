@@ -1,0 +1,334 @@
+
+{% extends "base.html" %}
+{% block title %}Students{% endblock title %}
+{% block main %}
+<main>
+    <style>
+        #page1{
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            background: #c4bfbf;
+        }
+        #student-btn{
+            width: 8vw;
+            height: 5vh;
+            color: red;
+            position: absolute;
+            top: 20vh;
+            left: 50vw;
+            font-style: oblique;
+            font-size:1vw;
+        
+        }
+        .table-container {
+          position: relative;
+          top: 15vh;
+          left: 5vw;
+          left: 5vw;
+        }
+          table {
+            width: 140%;
+            border-collapse: collapse;
+          }
+          #thead th {
+            background-color: #3498db;
+            color: #fff;
+            font-weight: bold;
+          }
+          table tr:nth-child(even) {
+            background-color: #f2f2f2e5;
+          }
+          th, td{
+            border: 1px solid #ddd;
+            padding: 1.8vh;
+            text-align: center;
+          }
+          #tbody{
+            background-color: #fff;
+          }
+          #msg{
+            color: green;
+            position: fixed;
+            top: 20vh;
+            left: 40vw;
+            font-size:3vh;
+            display: none;
+          }
+          .form-container {
+            width: 30vw;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            z-index: 9;
+            top: 22vh;
+            right: 20vw;
+            display:none;
+          }
+          
+          form {
+            text-align: left;
+          }
+          
+          fieldset {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+          }
+          
+          legend {
+            font-size: 1.2em;
+            font-weight: bold;
+          }
+          
+          label {
+            display: block;
+            margin-bottom: 5px;
+          }
+          
+          input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+          }
+          
+          input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+          }
+          input[type="reset"] {
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+          }
+          /* Added afterwards*/
+
+          .Edit img {
+            width: 2vw;
+          }
+          .Edit {
+            border-radius: 50%;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+          }
+          .Delete img {
+            width: 2vw;
+          }
+          .Delete {
+            border-radius: 50%;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding-left: 0.2vw;
+          }
+
+          #top-header {
+            width: 160%;
+            height: 16vh;
+            display: flex;
+            position: relative;
+            left: 1vw;
+            border-bottom: 2px solid rgb(197, 25, 25);
+            padding: 2vw 1vw ;
+            justify-content: space-between;
+          }
+          #namePlate #homePlate{
+            display: flex;
+          }
+          #namePlate #homePlate img {
+            width: 3vw;
+            margin-right: 0.8vw;
+          }
+          #namePlate p {
+            font-size: large;
+            padding:  0.3vw 3.5vw;
+            color: blue;
+          }
+          #searchBar {
+            /*display: flex;*/
+            align-items: center;
+            background-color: transparent;
+            /* background-color:red; */
+            position: relative;
+            padding-top: 1vw;
+            
+          }
+          #searchBar input {
+            background-color: transparent;
+            /* background-color: green; */
+            color: #fff;
+            font-size: large;
+            font-style: italic;
+            width: 20vw;
+            /* height: 4vh; */
+            border: 1px solid #3498db;
+            border-radius: 20px;
+          }
+          #search {
+            position: absolute;
+            right: 1vw;
+            top: 1.5vw;
+            background-color: transparent;
+            /* background-color: red; */
+            border: transparent;
+            font-size: large;
+            cursor: pointer;
+          }
+    </style>
+
+    <div id="page1">
+      <div id="top-header">
+        <div id="namePlate">
+          <div id="homePlate">
+            <img src="/static/reading-book.png" alt="">
+          <h1>YOUR STUDENTS</h1>
+        </div>
+            <p>Manage your students and add new ones!</p>
+        </div>
+        <div id="searchBar">
+          <input type="text" placeholder="Search.." />
+          <button id="search">🔍</button>
+        </div>
+      </div>
+      <button id="student-btn">Add Student</button>
+      <div class="table-container">
+        <table cellspacing="20" cellpadding="10">
+          <thead id="thead">
+            <tr>
+              <th>S.N.</th>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Email</th>
+              <th>Contact</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr>
+              <td>null</td>
+              <td>Ashes Pokhrel</td>
+              <td>Kanyam</td>
+              <td>pokhrel.ashes@gmail.com</td>
+              <td>9804000000</td>
+              <td>
+                <button class="Edit">
+                  <img src="/static/edit icon.png" alt="" />
+                </button>
+                <button class="Delete">
+                  <img src="/static/delete icon.png" alt="" />
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h2 id="msg"><i>Updated Successfully</i></h2>
+      <div class="form-container">
+        <form action="">
+          <fieldset>
+            <legend>Enter Details of Book:</legend>
+            <br />
+            <label for="name">Full Name: </label>
+            <input type="text" id="name" required /><br /><br />
+            <label for="address">Address:</label>
+            <input type="text" id="address" required /><br /><br />
+            <label for="email">Email: </label>
+            <input type="email" id="email" required /><br /><br />
+            <label for="contact">Contact:</label>
+            <input type="number" id="contact" required /><br /><br />
+            <input type="submit" id="submitbtn" value="Add Student" />
+            <input type="reset" id="resetbtn" value="Close Form" />
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </main>
+
+
+
+<script>
+
+    const formContainer = document.querySelector(".form-container");
+var studentbtn = document.querySelector("#student-btn");
+const submitBtn = document.querySelector("#submitbtn");
+const resetBtn = document.querySelector("#resetbtn");
+const EditBtn = document.querySelectorAll(".Edit");
+const DeleteBtn = document.querySelectorAll(".Delete");
+// let ariaRequired=false;
+
+displayForm();
+submitForm();
+
+function submitForm() {
+  let id = 1;
+  const tbody = document.querySelector("#tbody");
+
+  submitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const name = document.querySelector("#name").value;
+    const address = document.querySelector("#address").value;
+    const email = document.querySelector("#email").value;
+    const contact = document.querySelector("#contact").value;
+
+    if (
+      name.trim() === "" ||
+      address.trim() === "" ||
+      email.trim() === "" ||
+      contact <= 0
+    ) {
+      alert("Please fill in all fields with valid data.");
+      return;
+    }
+    tbody.innerHTML += `<tr>
+    <td>${id}</td>
+    <td>${name}</td>
+    <td>${address}</td>
+    <td>${email}</td>
+    <td>${contact}</td>
+    <td><button class="Edit"><img src="/static/edit icon.png" alt=""></button>
+      <button class="Delete"><img src="/static/delete icon.png" alt=""></button>
+    </td>
+    </tr>`;
+    id++;
+    // console.log("success");
+    clearForm();
+    formContainer.style.display = "none";
+    setMessage();
+  });
+}
+
+function displayForm() {
+  studentbtn.addEventListener("click", () => {
+    console.log("clicked");
+    formContainer.style.display = "block";
+  });
+  resetBtn.addEventListener("click", () => { 
+    // location.reload();
+    formContainer.style.display = "none";
+  });
+}
+function clearForm() {
+  document.querySelector("#name").value = "";
+  document.querySelector("#address").value = "";
+  document.querySelector("#email").value = "";
+  document.querySelector("#contact").value = "";
+}
+function setMessage() {
+  const msg = document.querySelector("#msg");
+  msg.style.display = "block";
+  setTimeout(message, 2000);
+  function message() {
+    msg.style.display = "none";
+  }
+}
+</script>
+{% endblock main %}
+{% block footer %}{% endblock footer %}

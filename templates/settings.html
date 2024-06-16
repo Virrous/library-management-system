@@ -1,0 +1,74 @@
+{% extends "base.html" %} {% block title %}Settings{% endblock title %} 
+{% block main %}
+<main>
+    <style>
+        #top-header {
+            width: 160%;
+            height: 16vh;
+            display: flex;
+            position: relative;
+            left: 1vw;
+            border-bottom: 2px solid rgb(197, 25, 25);
+            padding: 2vw 1vw ;
+            justify-content: space-between;
+          }
+          #namePlate #homePlate{
+            display: flex;
+          }
+          #namePlate #homePlate img {
+            width: 2.5vw;
+            margin-right: 0.8vw;
+          }
+          #namePlate p {
+            font-size: large;
+            padding:  0.3vw 3vw;
+            color: blue;
+          }
+          #searchBar {
+            /*display: flex;*/
+            align-items: center;
+            background-color: transparent;
+            /* background-color:red; */
+            position: relative;
+            padding-top: 1vw;
+            
+          }
+          #searchBar input {
+            background-color: transparent;
+            /* background-color: green; */
+            color: #fff;
+            font-size: large;
+            font-style: italic;
+            width: 20vw;
+            /* height: 4vh; */
+            border: 1px solid #3498db;
+            border-radius: 20px;
+          }
+          #search {
+            position: absolute;
+            right: 1vw;
+            top: 1.5vw;
+            background-color: transparent;
+            /* background-color: red; */
+            border: transparent;
+            font-size: large;
+            cursor: pointer;
+          }
+    </style>
+  <!-- <div id="page1"> -->
+    <div id="top-header">
+      <div id="namePlate">
+        <div id="homePlate">
+          <img src="/static/inside book icon.png" alt="" />
+          <h1>ISSUE BOOKS</h1>
+        </div>
+        <p>Manage your issued books!</p>
+      </div>
+      <div id="searchBar">
+        <input type="text" placeholder="Search.." />
+        <button id="search">🔍</button>
+      </div>
+    </div>
+  <!-- </div> -->
+</main>
+{% endblock main %}

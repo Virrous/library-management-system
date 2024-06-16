@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library Management System</title>
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+      }
+      .loader {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: black;
+        position: fixed;
+        z-index: 99;
+        top: 0;
+        transition: all ease 1s;
+      }
+      .loader h1 {
+        font-size: 4vw;
+        position: absolute;
+        background: linear-gradient(to right, orange, orangered);
+        color: transparent;
+        -webkit-background-clip: text;
+        opacity: 0;
+      }
+      .loader h1:nth-child(1) {
+        animation: loader-anime 1s 1s linear;
+      }
+      .loader h1:nth-child(2) {
+        animation: loader-anime 1s 2s linear;
+      }
+      .loader h1:nth-child(3) {
+        animation: loader-anime 1s 3s linear;
+      }
+      @keyframes loader-anime {
+        0% {
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      header {
+        background-color: #000;
+        width: 100%;
+        height: 14vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #nav-info {
+        width: 20vw;
+        height: 20vh;
+        background-color: #a02f2f;
+        color: #fff;
+        position: fixed;
+        z-index: 10;
+        top: 15vh;
+        display: none;
+      }
+      nav ul {
+        display: flex;
+        align-items: center;
+      }
+      nav ul li {
+        list-style: none;
+        padding: 0 1vw;
+      }
+      nav ul li a {
+        text-decoration: none;
+        /*background: linear-gradient(to left, rgb(243, 243, 243), rgb(226, 192, 179));
+        color: transparent;
+        -webkit-background-clip: text;*/
+        color: #fff;
+        font-size: 1.7vw;
+      }
+      main {
+        min-height: calc(80vh);
+        background-color: #e7e5e2;
+        overflow: hidden;
+      }
+      .page1 {
+        background-color: #2a2b2d;
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+      }
+      .page1 img {
+        background-size: cover;
+        border-radius: 1vh;
+      }
+      #introduction {
+        width: 40%;
+        margin: auto;
+        padding: 0 2vw;
+        color: #fff;
+      }
+      #introduction h1 {
+        font-size: 4vw;
+      }
+      #introduction p {
+        font-size: 2vw;
+        margin-top: 2vw;
+        position: relative;
+        z-index: 9;
+      }
+      #first-anime {
+        width: 15vw;
+        height: 15vw;
+        background: linear-gradient(to top, red, rgb(238, 35, 35));
+        filter: blur(25px);
+        border-radius: 50%;
+        position: absolute;
+        top: 50vh;
+        left: 22vw;
+        animation: first-anime 5s ease-in-out infinite alternate;
+      }
+      @keyframes first-anime {
+        from {
+          transform: translate(10%, -10%) skew(0);
+        }
+        to {
+          transform: translate(-10%, 10%) skew(-12deg);
+        }
+      }
+      #getStarted {
+        position: absolute;
+        top: 2vh;
+        left: 3vw;
+        background-color: orangered;
+        width: 7vw;
+        height: 3.5vw;
+      }
+      #getStarted a {
+        border: 2 px solid #000;
+        text-decoration: none;
+        color: white;
+      }
+      .page2 {
+        min-height: 100vh;
+        width: 100%;
+        padding: 5vw 0;
+      }
+      .feature {
+        width: 100%;
+        height: 100px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 0 3vw;
+        border-bottom: 1px solid rgba(122, 118, 118, 0.596);
+        overflow: hidden;
+      }
+      .feature h2 {
+        font-size: 2vw;
+        position: relative;
+        z-index: 9;
+      }
+      .hover-effect {
+        width: 100%;
+        height: 100%;
+        background-color: rgb(255, 115, 0);
+        position: absolute;
+        left: 0;
+        top: -100%;
+        transition: all ease 0.2s;
+      }
+      .feature:hover .hover-effect {
+        top: 0;
+      }
+      footer {
+        position: fixed;
+        bottom: 0;
+        right: 2vw;
+        z-index: 9;
+        text-align: end;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loader">
+      <h1>YOUR CHOICE</h1>
+      <h1>OUR DEDICATION</h1>
+      <h1>LIBRARY MANAGEMENT SYSTEM</h1>
+    </div>
+
+    <header>
+      <div id="nav-info">msdnnsm,sdn</div>
+      <nav>
+        <ul id="navbar-list">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Help and Support</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="page1">
+        <div id="introduction">
+          <h1>Optimize Your Library's Impact</h1>
+          <p>
+            Achieve greater success for your library and users with a proven,
+            flexible and unified library services platform. You and your library
+            will operate more efficiently, surpass patron expectations, and
+            exceed institutional goals with SajiloLibrary.
+          </p>
+        </div>
+        <img src="static/bookshelve.jpg" alt="" />
+        <div id="first-anime"></div>
+        <button id="getStarted"><a href="/form">Get Started</a></button>
+      </div>
+      <div class="page2">
+        <h1 id="our-feature">Our Features</h1>
+        <div class="feature-container">
+          <div class="feature">
+            <div class="hover-effect"></div>
+            <h2>Integration of all records of students</h2>
+          </div>
+          <div class="feature">
+            <div class="hover-effect"></div>
+            <h2>Manage the records systematically</h2>
+          </div>
+          <div class="feature">
+            <div class="hover-effect"></div>
+            <h2>Easy to maintain records</h2>
+          </div>
+          <div class="feature">
+            <div class="hover-effect"></div>
+            <h2>Leads to fast book entry</h2>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>Copyright &copy; www.SajiloLibrary.com/project</footer>
+
+    <script>
+      let loader = document.querySelector(".loader");
+      setTimeout(() => {
+        loader.style.top = "-100%";
+      }, 4000);
+    </script>
+  </body>
+</html>

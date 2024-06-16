@@ -1,0 +1,281 @@
+{% extends "base.html" %} {% block title %}Issue{% endblock title %}
+ {% block main %}
+<main>
+  <style>
+    #top-header {
+      width: 118%;
+      height: 16vh;
+      display: flex;
+      position: relative;
+      left: 1vw;
+      border-bottom: 2px solid rgb(197, 25, 25);
+      padding: 2vw 1vw;
+      justify-content: space-between;
+    }
+    #namePlate #homePlate {
+      display: flex;
+    }
+    #namePlate #homePlate img {
+      width: 2.5vw;
+      margin-right: 0.8vw;
+    }
+    #namePlate p {
+      font-size: large;
+      padding: 0.3vw 3vw;
+      color: blue;
+    }
+    #searchBar {
+      align-items: center;
+      background-color: transparent;
+      position: relative;
+      padding-top: 1vw;
+    }
+    #searchBar input {
+      background-color: transparent;
+      /* background-color: green; */
+      color: #fff;
+      font-size: large;
+      font-style: italic;
+      width: 20vw;
+      /* height: 4vh; */
+      border: 1px solid #3498db;
+      border-radius: 20px;
+    }
+    #search {
+      position: absolute;
+      right: 1vw;
+      top: 1.5vw;
+      background-color: transparent;
+      /* background-color: red; */
+      border: transparent;
+      font-size: large;
+      cursor: pointer;
+    }
+        /* styles for form */
+.form-container {
+  width: 50vw;
+  margin: 5vh 10vw;
+}
+
+fieldset {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+}
+legend {
+  font-weight: bold;
+  font-size: large;
+  color: red;
+}
+label {
+  display: inline-block;
+  width: 120px;
+  text-align: right;
+  margin-right: 10px;
+  font-size: large;
+}
+label[for='return-date']{
+  margin-left: 2vw;
+}
+input{
+  width: 12vw;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5vh;
+  margin-bottom: 10px;
+}
+input[type='date']{
+  width: 10vw;
+  padding: 1vh;
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+#table-name{
+  text-align: center;
+  margin-bottom: 2vh;
+}
+    /*Styles for table*/
+    table {
+      border-collapse: collapse;
+      width: 105%;
+      margin-left: 5vw;
+    }
+    #thead th {
+      background-color: #3498db;
+      color: #fff;
+      font-weight: bold;
+    }
+    table tr:nth-child(even) {
+      background-color: #f2f2f2e5;
+    }
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 1.8vh;
+      text-align: center;
+    }
+    #tbody {
+      background-color: #fff;
+    }
+    /*Styles for action button of table*/
+.Edit img {
+  width: 2vw;
+}
+.Edit {
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.Delete img {
+  width: 2vw;
+}
+.Delete {
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding-left: 0.2vw;
+}
+#key-dialogBox{
+  width: 25vw;
+  height: 30vh;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 4px;
+  display:none;
+  position: fixed;
+  z-index: 99;
+  top: 40vh;
+  left:40vw
+}
+#key-dialogBox label{
+  width: 20vw;
+  margin-top: 1vw;
+  font-size: larger;
+  color: red;
+}
+#key-dialogBox input{
+  margin-left: 7vw;
+  box-sizing: border-box;
+  border: 1.5px solid #dddddd8a;
+  border-radius: 4px;
+}
+#key-dialogBox button{
+  /*background-color: #3498db;*/
+  background-color: red;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  width: 10vw;
+  height: 4vh;
+  margin:1vw 0 0 8vw;
+  border-radius:20px;
+  font-size:1vw;
+}
+
+  </style>
+  <div id="page1">
+    <div id="top-header">
+      <div id="namePlate">
+        <div id="homePlate">
+          <img src="/static/inside book icon.png" alt="" />
+          <h1>ISSUE BOOKS</h1>
+        </div>
+        <p>Manage your issued books!</p>
+      </div>
+      <div id="searchBar">
+        <input type="text" placeholder="Search.." />
+        <button id="search">🔍</button>
+      </div>
+    </div>
+    <div id="key-dialogBox">
+      <form action="">
+        <label for="Message">Please Enter the Issue Key</label><br><br>
+        <input type="password"><br>
+        <button for="submit" id="issue-prompt">Issue</button><br>
+        <button>Close Box</button>
+      </form>
+    </div>
+    <div class="form-container">
+      <form action="">
+        <fieldset>
+          <legend>Enter the required details</legend>
+          <br />
+          <label for="book-id">Book ID : </label>
+          <input type="number" name="book-id" id="book-id"required />
+          <label for="title">Book Title : </label>
+          <input type="text" id="title" required />
+          <br><br>
+           <label for="student-id">Student ID :</label> 
+           <input type="number" id="student-id" name="student-id" required/>
+           <label for="student-name">Student Name :</label>
+           <input type="text" name="student-name" id="student-name" required/>
+           <br><br>
+           <label for="issue-date">Issue Date : </label>
+           <input type="date" id="issue-date" name="issue-date"required/>
+           <label for="return-date">Return Date :</label>
+           <input type="date" id="return-date" name="return-date" >
+           <br><br>
+           <button type="submit" id="issue-btn">Submit</button>
+        </fieldset>
+      </form>
+    </div>
+    <h1 id="table-name">List of Issued Books</h1>
+    <div id="table-container">
+     <table cellspacing="20" cellpadding="10">
+      <thead id="thead">
+        <tr>
+          <th>Book ID</th>
+          <th>Book Name</th>
+          <th>Student ID</th>
+          <th>Student Name</th>
+          <th>Issue Date</th>
+          <th>Return Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <tr>
+        <td>demo-id</td>
+        <td>demo-name</td>
+        <td>demo-id</td>
+        <td>demo-name</td>
+        <td>demo-date</td>
+        <td>demo-date</td>
+        <td>
+          <button class="Edit">
+            <img src="/static/edit icon.png" alt="" />
+          </button>
+          <button class="Delete">
+            <img src="/static/delete icon.png" alt="" />
+          </button>
+        </td>
+        </tr>
+      </tbody>
+     </table>
+    </div>
+  </div>
+</main>
+<script>
+  const issueBtn = document.querySelector("#issue-btn");
+  const issuePrompt = document.querySelector("#issue-prompt");
+  const dialogBox = document.querySelector("#key-dialogBox");
+  issueBtn.addEventListener('click',()=>{
+    dialogBox.style.display='block';
+  })
+
+</script>
+{% endblock main %}

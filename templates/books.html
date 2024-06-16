@@ -1,0 +1,338 @@
+{% extends "base.html" %} {% block title %}Books{% endblock title %} {% block main %}
+<main>
+  <style>
+    #page1 {
+      width: 100%;
+      min-height: 100vh;
+      position: relative;
+      background: #c4bfbf;
+    }
+    #book-btn {
+      width: 8vw;
+      height: 5vh;
+      color: red;
+      position: absolute;
+      top: 20vh;
+      left: 50vw;
+      font-style: oblique;
+      font-size: 1vw;
+      cursor: pointer;
+    }
+    .table-container {
+      position: relative;
+      top: 15vh;
+      left: 5vw;
+    }
+    table {
+      border-collapse: collapse;
+      width: 140%;
+    }
+    #thead th {
+      background-color: #3498db;
+      color: #fff;
+      font-weight: bold;
+    }
+    table tr:nth-child(even) {
+      background-color: #f2f2f2e5;
+    }
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 1.8vh;
+      text-align: center;
+    }
+    #tbody {
+      background-color: #fff;
+    }
+    #msg {
+      color: green;
+      position: fixed;
+      top: 22vh;
+      left: 40vw;
+      font-size: 3vh;
+      transition: all ease-in-out 2s;
+      display: none;
+    }
+    .form-container {
+      width: 30vw;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      z-index: 9;
+      top: 22vh;
+      right: 20vw;
+      display: none;
+    }
+
+    form {
+      text-align: left;
+    }
+
+    fieldset {
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    legend {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    input[type="submit"] {
+      background-color: #3498db;
+      color: #fff;
+      cursor: pointer;
+    }
+    input[type="reset"] {
+      background-color: #3498db;
+      color: #fff;
+      cursor: pointer;
+    }
+    .Edit img {
+      width: 2vw;
+    }
+    .Edit {
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    .Delete img {
+      width: 2vw;
+    }
+    .Delete {
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding-left: 0.2vw;
+    }
+    #top-header {
+      width: 160%;
+      height: 16vh;
+      display: flex;
+      position: relative;
+      left: 1vw;
+      border-bottom: 2px solid rgb(197, 25, 25);
+      padding: 2vw 1vw ;
+      justify-content: space-between;
+    }
+    #namePlate #homePlate{
+      display: flex;
+    }
+    #namePlate #homePlate img {
+      width: 2.5vw;
+      margin-right: 0.8vw;
+    }
+    #namePlate p {
+      font-size: large;
+      padding:  0.3vw 3vw;
+      color: blue;
+    }
+    #searchBar {
+      /*display: flex;*/
+      align-items: center;
+      background-color: transparent;
+      /* background-color:red; */
+      position: relative;
+      padding-top: 1vw;
+      
+    }
+    #searchBar input {
+      background-color: transparent;
+      /* background-color: green; */
+      color: #fff;
+      font-size: large;
+      font-style: italic;
+      width: 20vw;
+      /* height: 4vh; */
+      border: 1px solid #3498db;
+      border-radius: 20px;
+    }
+    #search {
+      position: absolute;
+      right: 1vw;
+      top: 1.5vw;
+      background-color: transparent;
+      /* background-color: red; */
+      border: transparent;
+      font-size: large;
+      cursor: pointer;
+    }
+  </style>
+  <div id="page1">
+    <div id="top-header">
+      <div id="namePlate">
+        <div id="homePlate">
+          <img src="/static/inside book icon.png" alt="">
+        <h1>YOUR BOOKS</h1>
+      </div>
+          <p>Manage your books and add new ones!</p>
+      </div>
+      <div id="searchBar">
+        <input type="text" placeholder="Search.." />
+        <button id="search">🔍</button>
+      </div>
+    </div>
+    <button id="book-btn">Add Book</button>
+    <div class="table-container">
+      <table cellspacing="20" cellpadding="10">
+        <thead id="thead">
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author(s)</th>
+            <th>Type</th>
+            <th>Shelf No.</th>
+            <th>Available Quantity</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr>
+            <td>null</td>
+            <td>sample book</td>
+            <td>sample author</td>
+            <td>sample type</td>
+            <td>Shelf C3</td>
+            <td>stock size</td>
+            <td>
+              <button class="Edit">
+                <img src="/static/edit icon.png" alt="" />
+              </button>
+              <button class="Delete">
+                <img src="/static/delete icon.png" alt="" />
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="msg"><i>Updated Successfully</i></h2>
+    <div class="form-container">
+      <form action="">
+        <fieldset>
+          <legend>Enter Details of Book:</legend>
+          <br />
+          <label for="title">Title : </label>
+          <input type="text" id="title" required /><br /><br />
+          <label for="author">Author : </label>
+          <input type="text" name="author" id="author" /><br />
+          <label for="Types">Type : </label>
+          <select name="types" id="book-types">
+            <option value="fiction">Fiction</option>
+            <option value="nobels">Stories/Nobels</option>
+            <option value="calculation">Calculations</option>
+            <option value="computer">computer</option>
+            <option value="others" selected>Others</option> </select
+          ><br />
+          <label for="shelf">Shelf No. : </label>
+          <input type="text" id="shelf" required /><br /><br />
+          <label for="quantity">Quantity Available : </label>
+          <input type="number" id="quantity" required /><br /><br />
+          <input type="submit" id="submitbtn" value="Add Book" />
+          <input type="reset" id="resetbtn" value="Close Form" />
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</main>
+
+<script>
+  const formContainer = document.querySelector(".form-container");
+  const Bookbtn = document.querySelector("#book-btn");
+  const submitBtn = document.querySelector("#submitbtn");
+  const resetBtn = document.querySelector("#resetbtn");
+  const EditBtn = document.querySelectorAll(".Edit");
+  const DeleteBtn = document.querySelectorAll(".Delete");
+
+  displayForm();
+  submitForm();
+
+  function submitForm() {
+    let id = 1;
+    const tbody = document.querySelector("#tbody");
+
+    submitBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const title = document.querySelector("#title").value;
+      const author = document.querySelector("#author").value;
+      const type = document.querySelector("#book-types").value;
+      const shelfNo = document.querySelector("#shelf").value;
+      const quantity = document.querySelector("#quantity").value;
+
+      if (
+        title.trim() === "" ||
+        author.trim() === "" ||
+        type.trim() === "" ||
+        shelfNo.trim() === "" ||
+        quantity <= 0
+      ) {
+        alert("Please fill in all fields with valid data.");
+        return;
+      }
+      tbody.innerHTML += `<tr>
+    <td>${id}</td>
+    <td>${title}</td>
+    <td>${author}</td>
+    <td>${type}</td>
+    <td>${shelfNo}</td>
+    <td>${quantity}</td>
+    <td><button class="Edit"><img src="/static/edit icon.png" alt=""></button>
+      <button class="Delete"><img src="/static/delete icon.png" alt=""></button>
+    </td>
+    </tr>`;
+      id++;
+      // console.log("success");
+      clearForm();
+      formContainer.style.display = "none";
+      setMessage();
+    });
+  }
+
+  function displayForm() {
+    Bookbtn.addEventListener("click", () => {
+      formContainer.style.display = "block";
+    });
+    resetBtn.addEventListener("click", () => {
+      // location.reload();
+      formContainer.style.display = "none";
+    });
+  }
+  function clearForm() {
+    document.querySelector("#title").value = "";
+    document.querySelector("#author").value = "";
+    document.querySelector("#book-types").value = "";
+    document.querySelector("#shelf").value = "";
+    document.querySelector("#quantity").value = "";
+  }
+  function setMessage() {
+    const msg = document.querySelector("#msg");
+    msg.style.display = "block";
+    setTimeout(message, 2000);
+    function message() {
+      msg.style.display = "none";
+    }
+  }
+</script>
+{% endblock main %} 
+{% block footer %}{% endblock footer %}

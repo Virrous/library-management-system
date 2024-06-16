@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock title %}
+
+{% block main %}
+   <main>
+    <style>
+        #page1{
+            /*width:calc(100vw- 15vw);*/
+          width:81vw;
+          height: 30vh;
+          position: relative;
+          border-bottom:2px solid #3498db;
+          margin: 2vw 1vw;
+        }
+        #top-header {
+          width: 80vw;
+          height: 16vh;
+          display: flex;
+          position: relative;
+          left: 1vw;
+          border-bottom: 2px solid rgb(197, 25, 25);
+          padding: 2vw 1vw ;
+          justify-content: space-between;
+        }
+        #namePlate #homePlate{
+          display: flex;
+        }
+        #namePlate #homePlate img {
+          width: 2.5vw;
+          margin-right: 0.8vw;
+        }
+        #namePlate p {
+          font-size: large;
+          padding:  0.3vw 3vw;
+          color: blue;
+        }
+        #searchBar {
+          /*display: flex;*/
+          align-items: center;
+          background-color: transparent;
+          /* background-color:red; */
+          position: relative;
+          padding-top: 1vw;
+          
+        }
+        #searchBar input {
+          background-color: transparent;
+          /* background-color: green; */
+          color: #fff;
+          font-size: large;
+          font-style: italic;
+          width: 20vw;
+          /* height: 4vh; */
+          border: 1px solid #3498db;
+          border-radius: 20px;
+        }
+        #search {
+          position: absolute;
+          right: 1vw;
+          top: 1.5vw;
+          background-color: transparent;
+          /* background-color: red; */
+          border: transparent;
+          font-size: large;
+          cursor: pointer;
+        }
+        #page1{
+          display: flex;
+          justify-content: space-between;
+        }
+            /* styles for total data display section*/
+         #total-data{
+           display: grid;
+           grid-template-columns: repeat(3,1fr); 
+           width: 60%;
+           height: 25vh;
+           
+         }
+         .all-data{
+           width: 15vw;
+           height: 10vh;
+           /*border: 1px solid #271ad6;*/
+           border-radius: 5px;
+           background-color: #d6c9c9;
+           padding:1vw;
+           text-align: Left;
+           z-index:99;
+           margin-left: 2vw;
+           margin-top: 1vh;
+           cursor: pointer;
+         }
+         .all-data label{
+          color: red; 
+          font-size: larger;
+         }
+         .all-data p{
+          margin-top: 1vh;
+         }
+         .all-data:hover{
+          background-color: #ebdede;
+           border: 0.5px solid #d6c9c9;
+
+         }
+         #todays-report{
+          width: 23vw;
+          height: 25vh;
+          border:1px solid red;
+          border-radius: 5px;
+          margin-right: 2vw;
+         }
+    </style>
+        <div id="top-header">
+            <div id="namePlate">
+              <div id="homePlate">
+                <img src="/static/home-icon-silhouette.png" alt="">
+              <h1>DASHBOARD</h1>
+            </div>
+                <p>Manage your SajiloLibrary</p>
+            </div>
+            <div id="searchBar">
+              <input type="text" placeholder="Search.." />
+              <button id="search">🔍</button>
+            </div>
+          </div>
+          <div id="page1">
+            <div id="total-data">
+              <div class="all-data" id="total-book">
+                <label for="book">0</label>
+                <p>Total Books</p>
+              </div>
+              <div class="all-data" id="total-student">
+                <label for="student">0</label>
+                <p>Total Students</p>
+              </div>
+              <div class="all-data" id="issued-book">
+                <label for="book">0</label>
+                <p>Issued Books</p>
+              </div>
+              <div class="all-data" id="returned-book">
+                <label for="book">0</label>
+                <p>Returned Books</p>
+              </div>
+              <div class="all-data" id="passive">
+                <label for="book">0</label>
+                <p>Available Books</p>
+              </div>
+              <div class="all-data" id="out-of-stock">
+                <label for="book">0</label>
+                <p>Out of Stock</p>
+              </div>
+            </div>
+            <div id="todays-report"></div>
+          </div>
+   </main>
+ {% endblock main %}
+ {% block footer %}{% endblock footer %}

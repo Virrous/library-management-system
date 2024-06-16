@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}{% endblock title %} | Library Management System
+    </title>
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      header {
+        width: 15vw;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(to left, #3498db, #2ecc71);
+        padding: 2vw;
+      }
+      #user-logo img {
+        width: 6vw;
+        margin: 1.8vw 3vw 1vw 3vw;
+      }
+      #user-logo p {
+        font-size: 2vw;
+        margin: 0 2vw 3vw 2.5vw;
+      }
+      nav ul li {
+        list-style: none;
+        padding: 0.5vw 0 0.5vw 0;
+      }
+      nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 1.6vw;
+        font-weight: bold;
+      }
+      nav ul li img {
+        width: 1.6vw;
+        margin-left: 0.5vw;
+        margin-right: 0.5vw;
+      }
+      footer {
+        position: fixed;
+        bottom: 0;
+        right: 2vw;
+        z-index: 9;
+        text-align: end;
+      }
+      .wrapper {
+        display: flex;
+      }
+      .main{
+        min-width:calc(100vw- 15vw);
+        min-height:calc(100vh- 15vh);
+        position: relative;
+       /*background: #c4bfbf;*/
+      }
+      body{
+        background: #c4bfbf;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div id="top-header"></div> -->
+    <div class="wrapper">
+      <header>
+        <nav>
+          <div id="user-logo">
+            <img src="static/profile.png" alt="" />
+            <p>ADMIN</p>
+          </div>
+          <ul>
+            <li>
+              <img src="static/dashboard-16.ico" alt="" />
+              <a href="/dashboard">Dashboard</a>
+            </li>
+            <li>
+              <img src="static/student-24.ico" alt="" />
+              <a href="/issueBook">Issue Book</a>
+            </li>
+            <li>
+              <img src="static/book-stack-16.ico" alt="" />
+              <a href="/books">Your Books</a>
+            </li>
+            <li>
+              <img src="/static/student-24.ico" alt="" />
+              <a href="/students">Students</a>
+            </li>
+            <li>
+              <img src="static/student-24.ico" alt="" />
+              <a href="/reports">Report</a>
+            </li>
+            <li>
+              <img src="static/student-24.ico" alt="" />
+              <a href="/settings">Settings</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <div class="main">
+        <!-- <div id="top-header"></div> -->
+        {% block main %}{% endblock main %}
+      </div>
+    </div>
+    <footer>Copyright &copy; www.SajiloLibrary.com/project</footer>
+  </body>
+</html>
