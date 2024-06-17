@@ -1,4 +1,6 @@
 from django.contrib import admin
-from .models import login_detail
+from .models import *
 # Register your models here.
-admin.site.register(login_detail)
+admin.site.register(Book)
+admin.site.register(Student)
+

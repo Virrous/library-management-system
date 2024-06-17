@@ -2,14 +2,37 @@ from django.db import models
 # from django import forms
 
 # Create your models here.
-class login_detail(models.Model):
-    username=models.CharField(max_length=20)
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.CharField(max_length=50)
+    
+    # for book type
+    fiction = 'fiction'
+    nobels = 'nobels'
+    calculation = 'calculation'
+    computer = 'computer'
+    others = 'others'
+    type_choice = [
+        (fiction, 'fiction'),
+        (nobels, 'nobels'),
+        (calculation, 'calculation'),
+        (computer, 'computer'),
+        (others, 'others'),
+    ]
+    type = models.CharField(max_length=20,choices=type_choice,default=others)
+    shelf = models.CharField(max_length=5)
+    quantity = models.PositiveIntegerField()
+    
+    # to define models name in database
+    def __str__(self):
+        return self.title
+        
+
+class Student(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
     email = models.EmailField(max_length=50)
-    password=models.CharField(max_length=16)
+    contact = models.PositiveBigIntegerField()
     
     def __str__(self):
-        return self.username
-        
-# class user_info(login_detail):
-#     firstname = models.CharField(max_length=30, blank=True)
-#     lastname  = models.CharField(max_length=30, blank=True
+        return self.name
