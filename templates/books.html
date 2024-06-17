@@ -12,8 +12,8 @@
       height: 5vh;
       color: red;
       position: absolute;
-      top: 20vh;
-      left: 50vw;
+      top: 21vh;
+      left: 52vw;
       font-style: oblique;
       font-size: 1vw;
       cursor: pointer;
@@ -44,11 +44,18 @@
     #tbody {
       background-color: #fff;
     }
+    #total_books{
+      color:#900C3F;
+      position: fixed;
+      top: 25vh;
+      left: 20vw;
+      font-size: 2.8vh;
+    }
     #msg {
       color: green;
       position: fixed;
       top: 22vh;
-      left: 40vw;
+      left: 48vw;
       font-size: 3vh;
       transition: all ease-in-out 2s;
       display: none;
@@ -207,29 +214,32 @@
           </tr>
         </thead>
         <tbody id="tbody">
-          <tr>
-            <td>null</td>
-            <td>sample book</td>
-            <td>sample author</td>
-            <td>sample type</td>
-            <td>Shelf C3</td>
-            <td>stock size</td>
-            <td>
-              <button class="Edit">
-                <img src="/static/edit icon.png" alt="" />
-              </button>
-              <button class="Delete">
-                <img src="/static/delete icon.png" alt="" />
-              </button>
-            </td>
-          </tr>
+         {% for book in books%}
+         <tr>
+          <td>{{book.id}}</td>
+          <td>{{book.title}}</td>
+          <td>{{book.author}}</td>
+          <td>{{book.type}}</td>
+          <td>{{book.shelf}}</td>
+          <td>{{book.quantity}}</td>
+          <td>
+            <button class="Edit">
+              <img src="/static/edit icon.png" alt="" />
+            </button>
+            <button class="Delete">
+              <img src="/static/delete icon.png" alt="" />
+            </button>
+          </td>
+        </tr>
+         {% endfor %}
         </tbody>
       </table>
     </div>
-
+    <h2 id="total_books">Total Books : {{Book|length}}<h2>
     <h2 id="msg"><i>Updated Successfully</i></h2>
     <div class="form-container">
-      <form action="">
+      <form action="" method="POST">
+        {% csrf_token %}
         <fieldset>
           <legend>Enter Details of Book:</legend>
           <br />

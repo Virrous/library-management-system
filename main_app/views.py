@@ -3,7 +3,7 @@ from django.shortcuts import render,redirect
 # from .models import login_detail
 # from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate,logout
-
+from .models import *
 
 
 # Create your views here.
@@ -42,7 +42,11 @@ def issueBook(request):
     return render(request, 'issueBook.html')
 
 def books(request):
-    return render(request, 'books.html')
+    return render(request, 'books.html', context={'current_tab':'books'})
+
+def books_tab(request):
+    books = Book.objects.all()
+    return render(request, 'books.html', context={'current_tab':'books', 'books':books})
 
 def students(request):
     return render(request, 'student.html')
