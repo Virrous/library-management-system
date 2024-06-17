@@ -12,6 +12,7 @@ urlpatterns = [
      # path("signup", views.signup_view, name="signup"),
      path("dashboard", views.dashboard, name='dashboard'),
      path('books', views.books, name='books'),
+     path('books_tab', views.books_tab, name='books_tab'),
      path('students', views.students, name='students'),
      path('issueBook', views.issueBook, name='issueBook'),
      path('reports', views.reports, name='reports'),
