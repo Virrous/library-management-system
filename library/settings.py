@@ -55,7 +55,7 @@ ROOT_URLCONF = 'library.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates",],
+        'DIRS': [BASE_DIR / "main_app/templates",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,5 +125,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Added by user
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "main_app/static",
 ]

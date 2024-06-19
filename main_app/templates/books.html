@@ -1,4 +1,5 @@
-{% extends "base.html" %} {% block title %}Books{% endblock title %} {% block main %}
+{% extends "base.html" %}
+ {% block title %}Books{% endblock title %} {% block main %}
 <main>
   <style>
     #page1 {
@@ -214,15 +215,15 @@
           </tr>
         </thead>
         <tbody id="tbody">
-         {% for book in books%}
+          {% for book in books%}
          <tr>
           <td>{{book.id}}</td>
           <td>{{book.title}}</td>
           <td>{{book.author}}</td>
-          <td>{{book.type}}</td>
+          <td>{{book.get_type_display}}</td>
           <td>{{book.shelf}}</td>
           <td>{{book.quantity}}</td>
-          <td>
+           <td>
             <button class="Edit">
               <img src="/static/edit icon.png" alt="" />
             </button>
@@ -235,7 +236,8 @@
         </tbody>
       </table>
     </div>
-    <h2 id="total_books">Total Books : {{Book|length}}<h2>
+    <h2 id="total_books">Total Books : {{books|length}}</h2>
+
     <h2 id="msg"><i>Updated Successfully</i></h2>
     <div class="form-container">
       <form action="" method="POST">
@@ -300,18 +302,7 @@
         alert("Please fill in all fields with valid data.");
         return;
       }
-      tbody.innerHTML += `<tr>
-    <td>${id}</td>
-    <td>${title}</td>
-    <td>${author}</td>
-    <td>${type}</td>
-    <td>${shelfNo}</td>
-    <td>${quantity}</td>
-    <td><button class="Edit"><img src="/static/edit icon.png" alt=""></button>
-      <button class="Delete"><img src="/static/delete icon.png" alt=""></button>
-    </td>
-    </tr>`;
-      id++;
+     
       // console.log("success");
       clearForm();
       formContainer.style.display = "none";

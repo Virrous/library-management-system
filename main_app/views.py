@@ -2,8 +2,9 @@ from django.shortcuts import render,redirect
 # from django.contrib.auth import authenticate
 # from .models import login_detail
 # from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, authenticate,logout
-from .models import *
+# from django.contrib.auth import login, authenticate,logout
+from .models import Book
+# from .forms import BookForm
 
 
 # Create your views here.
@@ -17,23 +18,23 @@ def get_started():
 def form(request):
     return render(request, 'form.html')
 
-def login_view(request):
-     if request.method == "POST":
-        username=request.POST.get('username')
-        password=request.POST.get('password')
+# def login_view(request):
+#      if request.method == "POST":
+#         username=request.POST.get('username')
+#         password=request.POST.get('password')
         
-        # check if user has entered correct creditentals or not
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect("/dashboard")
+#         # check if user has entered correct creditentals or not
+#         user = authenticate(username=username, password=password)
+#         if user is not None:
+#             login(request, user)
+#             return redirect("/dashboard")
            
-        else:
-            return redirect("/")
+#         else:
+#             return redirect("/")
         
-def logout_view(request):
-    logout(request)
-    return redirect('/form')
+# def logout_view(request):
+#     logout(request)
+#     return redirect('/form')
 
 def dashboard(request):
     return render(request, 'dashboard.html')
@@ -41,12 +42,24 @@ def dashboard(request):
 def issueBook(request):
     return render(request, 'issueBook.html')
 
-def books(request):
-    return render(request, 'books.html', context={'current_tab':'books'})
+# def add_book(request):
+#     if request.method == 'POST':
+#         form = BookForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('book_list')
+#     else:
+#         form = BookForm()
+#     return render(request, 'add_book.html', {'form': form})
 
-def books_tab(request):
+# def book_list(request):
+#     books = Book.objects.all()
+#     return render(request, 'books.html', {'books': books})
+
+def books(request):
+    # return render(request, 'books.html')
     books = Book.objects.all()
-    return render(request, 'books.html', context={'current_tab':'books', 'books':books})
+    return render(request, 'books.html', {'books': books})
 
 def students(request):
     return render(request, 'student.html')

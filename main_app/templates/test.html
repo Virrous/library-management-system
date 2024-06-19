@@ -42,3 +42,16 @@
       </button>
     </td>
   </tr>
+
+  tbody.innerHTML += `<tr>
+    <td>${id}</td>
+    <td>${title}</td>
+    <td>${author}</td>
+    <td>${type}</td>
+    <td>${shelfNo}</td>
+    <td>${quantity}</td>
+    <td><button class="Edit"><img src="/static/edit icon.png" alt=""></button>
+      <button class="Delete"><img src="/static/delete icon.png" alt=""></button>
+    </td>
+    </tr>`;
+      id++;
