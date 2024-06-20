@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration</title>
+</head>
+<body>
+    <form action="process_registration.php" method="post">
+        <label for="fullname">Full Name:</label>
+        <input type="text" id="fullname" name="fullname" maxlength="40" required>
+        <br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" pattern="[A-Za-z]+\d+" title="Username must start with letters followed by numbers." required>
+        <br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" minlength="9" required>
+        <br>
+
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>
+
+<tr>
+    <td>null</td>
+    <td>sample book</td>
+    <td>sample author</td>
+    <td>sample type</td>
+    <td>Shelf C3</td>
+    <td>stock size</td>
+    <td>
+      <button class="Edit">
+        <img src="/static/edit icon.png" alt="" />
+      </button>
+      <button class="Delete">
+        <img src="/static/delete icon.png" alt="" />
+      </button>
+    </td>
+  </tr>
+
+  tbody.innerHTML += `<tr>
+    <td>${id}</td>
+    <td>${title}</td>
+    <td>${author}</td>
+    <td>${type}</td>
+    <td>${shelfNo}</td>
+    <td>${quantity}</td>
+    <td><button class="Edit"><img src="/static/edit icon.png" alt=""></button>
+      <button class="Delete"><img src="/static/delete icon.png" alt=""></button>
+    </td>
+    </tr>`;
+      id++;
+
+
+
+      {% comment %} script for books.html {% endcomment %}
+      const formContainer = document.querySelector(".form-container");
+      const Bookbtn = document.querySelector("#book-btn");
+      const submitBtn = document.querySelector("#submitbtn");
+      const resetBtn = document.querySelector("#resetbtn");
+      const EditBtn = document.querySelectorAll(".Edit");
+      const DeleteBtn = document.querySelectorAll(".Delete");
+    
+      displayForm();
+      submitForm();
+    
+      function submitForm() {
+        let id = 1;
+        const tbody = document.querySelector("#tbody");
+    
+        submitBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const title = document.querySelector("#title").value;
+          const author = document.querySelector("#author").value;
+          const type = document.querySelector("#book-types").value;
+          const shelfNo = document.querySelector("#shelf").value;
+          const quantity = document.querySelector("#quantity").value;
+    
+          if (
+            title.trim() === "" ||
+            author.trim() === "" ||
+            type.trim() === "" ||
+            shelfNo.trim() === "" ||
+            quantity <= 0
+          ) {
+            alert("Please fill in all fields with valid data.");
+            return;
+          }
+         
+          // console.log("success");
+          clearForm();
+          formContainer.style.display = "none";
+          setMessage();
+        });
+      }
+    
+      function displayForm() {
+        Bookbtn.addEventListener("click", () => {
+          formContainer.style.display = "block";
+        });
+        resetBtn.addEventListener("click", () => {
+          // location.reload();
+          formContainer.style.display = "none";
+        });
+      }
+      function clearForm() {
+        document.querySelector("#title").value = "";
+        document.querySelector("#author").value = "";
+        document.querySelector("#book-types").value = "";
+        document.querySelector("#shelf").value = "";
+        document.querySelector("#quantity").value = "";
+      }
+      function setMessage() {
+        const msg = document.querySelector("#msg");
+        msg.style.display = "block";
+        setTimeout(message, 2000);
+        function message() {
+          msg.style.display = "none";
+        }
+      }

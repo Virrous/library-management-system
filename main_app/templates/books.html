@@ -1,4 +1,5 @@
-{% extends "base.html" %} {% block title %}Books{% endblock title %} {% block main %}
+{% extends "base.html" %}
+ {% block title %}Books{% endblock title %} {% block main %}
 <main>
   <style>
     #page1 {
@@ -12,8 +13,8 @@
       height: 5vh;
       color: red;
       position: absolute;
-      top: 20vh;
-      left: 50vw;
+      top: 21vh;
+      left: 52vw;
       font-style: oblique;
       font-size: 1vw;
       cursor: pointer;
@@ -44,11 +45,18 @@
     #tbody {
       background-color: #fff;
     }
+    #total_books{
+      color:#900C3F;
+      position: fixed;
+      top: 25vh;
+      left: 20vw;
+      font-size: 2.8vh;
+    }
     #msg {
       color: green;
       position: fixed;
       top: 22vh;
-      left: 40vw;
+      left: 48vw;
       font-size: 3vh;
       transition: all ease-in-out 2s;
       display: none;
@@ -96,10 +104,16 @@
       border-radius: 4px;
     }
 
-    input[type="submit"] {
+    #submitbtn {
       background-color: #3498db;
       color: #fff;
       cursor: pointer;
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 4px;
     }
     input[type="reset"] {
       background-color: #3498db;
@@ -207,34 +221,38 @@
           </tr>
         </thead>
         <tbody id="tbody">
-          <tr>
-            <td>null</td>
-            <td>sample book</td>
-            <td>sample author</td>
-            <td>sample type</td>
-            <td>Shelf C3</td>
-            <td>stock size</td>
-            <td>
-              <button class="Edit">
-                <img src="/static/edit icon.png" alt="" />
-              </button>
-              <button class="Delete">
-                <img src="/static/delete icon.png" alt="" />
-              </button>
-            </td>
-          </tr>
+          {% for book in books%}
+         <tr>
+          <td>{{book.id}}</td>
+          <td>{{book.title}}</td>
+          <td>{{book.author}}</td>
+          <td>{{book.get_type_display}}</td>
+          <td>{{book.shelf}}</td>
+          <td>{{book.quantity}}</td>
+           <td>
+            <button class="Edit">
+              <img src="/static/edit icon.png" alt="" />
+            </button>
+            <button class="Delete">
+              <img src="/static/delete icon.png" alt="" />
+            </button>
+          </td>
+        </tr>
+         {% endfor %}
         </tbody>
       </table>
     </div>
+    <h2 id="total_books">Total Books : {{books|length}}</h2>
 
     <h2 id="msg"><i>Updated Successfully</i></h2>
     <div class="form-container">
-      <form action="">
+      <form action="/books" method="POST">
+        {% csrf_token %}
         <fieldset>
           <legend>Enter Details of Book:</legend>
           <br />
           <label for="title">Title : </label>
-          <input type="text" id="title" required /><br /><br />
+          <input type="text" id="title" name="title" required /><br /><br />
           <label for="author">Author : </label>
           <input type="text" name="author" id="author" /><br />
           <label for="Types">Type : </label>
@@ -243,16 +261,17 @@
             <option value="nobels">Stories/Nobels</option>
             <option value="calculation">Calculations</option>
             <option value="computer">computer</option>
-            <option value="others" selected>Others</option> </select
-          ><br />
+            <option value="others" selected >Others</option> </select>
+          <br />
           <label for="shelf">Shelf No. : </label>
-          <input type="text" id="shelf" required /><br /><br />
+          <input type="text" id="shelf" name="shelf" required /><br /><br />
           <label for="quantity">Quantity Available : </label>
-          <input type="number" id="quantity" required /><br /><br />
-          <input type="submit" id="submitbtn" value="Add Book" />
+          <input type="number" id="quantity" name="quantity" required /><br /><br />
+          <button type="submit" id="submitbtn">Add Book</button>
           <input type="reset" id="resetbtn" value="Close Form" />
         </fieldset>
       </form>
+
     </div>
   </div>
 </main>
@@ -269,7 +288,6 @@
   submitForm();
 
   function submitForm() {
-    let id = 1;
     const tbody = document.querySelector("#tbody");
 
     submitBtn.addEventListener("click", (e) => {
@@ -280,6 +298,7 @@
       const shelfNo = document.querySelector("#shelf").value;
       const quantity = document.querySelector("#quantity").value;
 
+      
       if (
         title.trim() === "" ||
         author.trim() === "" ||
@@ -290,21 +309,10 @@
         alert("Please fill in all fields with valid data.");
         return;
       }
-      tbody.innerHTML += `<tr>
-    <td>${id}</td>
-    <td>${title}</td>
-    <td>${author}</td>
-    <td>${type}</td>
-    <td>${shelfNo}</td>
-    <td>${quantity}</td>
-    <td><button class="Edit"><img src="/static/edit icon.png" alt=""></button>
-      <button class="Delete"><img src="/static/delete icon.png" alt=""></button>
-    </td>
-    </tr>`;
-      id++;
+     
       // console.log("success");
       clearForm();
-      formContainer.style.display = "none";
+      //formContainer.style.display = "none";
       setMessage();
     });
   }
@@ -321,7 +329,7 @@
   function clearForm() {
     document.querySelector("#title").value = "";
     document.querySelector("#author").value = "";
-    document.querySelector("#book-types").value = "";
+    document.querySelector("#book-types").value = "others";
     document.querySelector("#shelf").value = "";
     document.querySelector("#quantity").value = "";
   }
@@ -334,5 +342,7 @@
     }
   }
 </script>
+
+
 {% endblock main %} 
 {% block footer %}{% endblock footer %}

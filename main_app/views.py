@@ -2,9 +2,9 @@ from django.shortcuts import render,redirect
 # from django.contrib.auth import authenticate
 # from .models import login_detail
 # from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, authenticate,logout
-
-
+# from django.contrib.auth import login, authenticate,logout
+from .models import *
+from .forms import BookForm
 
 # Create your views here.
 def index(request):
@@ -17,38 +17,59 @@ def get_started():
 def form(request):
     return render(request, 'form.html')
 
-def login_view(request):
-     if request.method == "POST":
-        username=request.POST.get('username')
-        password=request.POST.get('password')
+# def login_view(request):
+#      if request.method == "POST":
+#         username=request.POST.get('username')
+#         password=request.POST.get('password')
         
-        # check if user has entered correct creditentals or not
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect("/dashboard")
+#         # check if user has entered correct creditentals or not
+#         user = authenticate(username=username, password=password)
+#         if user is not None:
+#             login(request, user)
+#             return redirect("/dashboard")
            
-        else:
-            return redirect("/")
+#         else:
+#             return redirect("/")
         
-def logout_view(request):
-    logout(request)
-    return redirect('/form')
+# def logout_view(request):
+#     logout(request)
+#     return redirect('/form')
 
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    books = Book.objects.all()
+    students = Student.objects.all()
+    return render(request, 'dashboard.html',{'books':books,'students':students})
 
 def issueBook(request):
     return render(request, 'issueBook.html')
 
+    
+  
+# def book_list(request):
+#     books = Book.objects.all()
+#     return render(request, 'books.html', {'books': books})
+
 def books(request):
-    return render(request, 'books.html')
+    
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('books')  # Redirect to the same page to see the updated list
+    else:
+        form = BookForm()
+        # print(form.errors)
+        
+    books = Book.objects.all()
+    return render(request, 'books.html', {'books': books,'form': form})
+
+def add_book(request):
+   pass
 
 def students(request):
-    return render(request, 'student.html')
+    students = Student.objects.all()
+    return render(request, 'student.html', {'students':students})
 
 def reports(request):
     return render(request, 'reports.html')
 
-def settings(request):
-    return render(request, 'settings.html')
