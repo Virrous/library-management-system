@@ -4,8 +4,6 @@ from django.shortcuts import render,redirect
 # from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 # from django.contrib.auth import login, authenticate,logout
 from .models import Book
-# from .forms import BookForm
-
 
 # Create your views here.
 def index(request):
@@ -42,16 +40,8 @@ def dashboard(request):
 def issueBook(request):
     return render(request, 'issueBook.html')
 
-# def add_book(request):
-#     if request.method == 'POST':
-#         form = BookForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('book_list')
-#     else:
-#         form = BookForm()
-#     return render(request, 'add_book.html', {'form': form})
-
+    
+  
 # def book_list(request):
 #     books = Book.objects.all()
 #     return render(request, 'books.html', {'books': books})
@@ -60,6 +50,14 @@ def books(request):
     # return render(request, 'books.html')
     books = Book.objects.all()
     return render(request, 'books.html', {'books': books})
+
+def add_book(request):
+    book_item =(title = request.POST['title'],
+                 author = request.POST['author'],
+                 type = request.POST['types'],
+                 quantity = request.POST['quantity'])
+    book_item.save()
+    return redirect('/books')
 
 def students(request):
     return render(request, 'student.html')

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -74,32 +75,34 @@
             <img src="static/profile.png" alt="" />
             <p>ADMIN</p>
           </div>
+          
           <ul>
             <li>
-              <img src="static/dashboard-16.ico" alt="" />
-              <a href="/dashboard">Dashboard</a>
+                <img src="{% static 'main_app/dashboard-16.ico' %}" alt="" />
+                <a href="/dashboard">Dashboard</a>
             </li>
             <li>
-              <img src="static/student-24.ico" alt="" />
-              <a href="/issueBook">Issue Book</a>
+                <img src="{% static 'main_app/student-24.ico' %}" alt="" />
+                <a href="/issueBook">Issue Book</a>
             </li>
             <li>
-              <img src="static/book-stack-16.ico" alt="" />
-              <a href="/books">Your Books</a>
+                <img src="{% static 'main_app/book-stack-16.ico' %}" alt="" />
+                <a href="/books">Your Books</a>
             </li>
             <li>
-              <img src="/static/student-24.ico" alt="" />
-              <a href="/students">Students</a>
+                <img src="{% static 'main_app/student-24.ico' %}" alt="" />
+                <a href="/students">Students</a>
             </li>
             <li>
-              <img src="static/student-24.ico" alt="" />
-              <a href="/reports">Report</a>
+                <img src="{% static 'main_app/student-24.ico' %}" alt="" />
+                <a href="/reports">Report</a>
             </li>
             <li>
-              <img src="static/student-24.ico" alt="" />
-              <a href="/settings">Settings</a>
+                <img src="{% static 'main_app/student-24.ico' %}" alt="" />
+                <a href="/settings">Settings</a>
             </li>
-          </ul>
+        </ul>
+        
         </nav>
       </header>
       <div class="main">
