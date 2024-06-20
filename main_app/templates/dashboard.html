@@ -108,6 +108,30 @@
           border-radius: 5px;
           margin-right: 2vw;
          }
+         .manage{
+          width: 15vw;
+           height: 8vh;
+           /*border: 1px solid #271ad6;*/
+           border-radius: 5px;
+           background-color: #d6c9c9;
+           padding:4vw;
+           text-align: center;
+           z-index:99;
+           margin-left: 8vw;
+           margin-top: 3vh;
+           padding-button: 7vw;
+          
+           cursor: pointer;
+         }
+         .manage img{
+          width: 1.6vw;
+        margin-left: 0.5vw;
+        margin-right: 0.5vw;
+        margin-button: 0.5vh;
+        margin-top: 0.2vh;
+         }
+         
+
     </style>
         <div id="top-header">
             <div id="namePlate">
@@ -151,6 +175,30 @@
             </div>
             <div id="todays-report"></div>
           </div>
+
+          <div id="redirect">
+            <button class="manage" id="Issued">
+              <label for="book">
+                <img src="/static/inside book icon.png" alt="" />
+              </label>
+              <p>Issued books</p>
+            </button>
+            <button class="manage" id="Addbooks">
+              <label for="book">
+                <img src="/static/inside book icon.png" alt="" />
+              </label>
+              <p>Add books</p>
+            </button>
+            <button class="manage" id="AddStds">
+              <label for="book">
+                <img src="/static/reading-book.png" alt="">
+              </label>
+              <p>Add Students</p>
+            </button>
+          
+          </div>
+
+    
    </main>
  {% endblock main %}
  {% block footer %}{% endblock footer %}
