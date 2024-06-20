@@ -248,13 +248,14 @@ button[type="submit"]:hover {
         </tr>
       </thead>
       <tbody id="tbody">
+        {% for details in issues%}
         <tr>
-        <td>demo-id</td>
-        <td>demo-name</td>
-        <td>demo-id</td>
-        <td>demo-name</td>
-        <td>demo-date</td>
-        <td>demo-date</td>
+        <td>{{details.book_id}}</td>
+        <td>{{details.book}}</td>
+        <td>{{details.student_id}}</td>
+        <td>{{details.student}}</td>
+        <td>{{details.issue_date}}</td>
+        <td>{{details.return_date}}</td>
         <td>
           <button class="Edit">
             <img src="/static/edit icon.png" alt="" />
@@ -264,6 +265,7 @@ button[type="submit"]:hover {
           </button>
         </td>
         </tr>
+        {% endfor %}
       </tbody>
      </table>
     </div>
@@ -274,6 +276,7 @@ button[type="submit"]:hover {
   const issuePrompt = document.querySelector("#issue-prompt");
   const dialogBox = document.querySelector("#key-dialogBox");
   issueBtn.addEventListener('click',()=>{
+    
     dialogBox.style.display='block';
   })
 

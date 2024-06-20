@@ -38,10 +38,12 @@ def form(request):
 def dashboard(request):
     books = Book.objects.all()
     students = Student.objects.all()
-    return render(request, 'dashboard.html',{'books':books,'students':students})
+    issues = Issued_Book.objects.all()
+    return render(request, 'dashboard.html',{'books':books,'students':students, 'issues':issues})
 
 def issueBook(request):
-    return render(request, 'issueBook.html')
+    issues = Issued_Book.objects.all()
+    return render(request, 'issueBook.html',{'issues':issues})
 
     
   
