@@ -104,10 +104,16 @@
       border-radius: 4px;
     }
 
-    input[type="submit"] {
+    #submitbtn {
       background-color: #3498db;
       color: #fff;
       cursor: pointer;
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 4px;
     }
     input[type="reset"] {
       background-color: #3498db;
@@ -240,7 +246,7 @@
 
     <h2 id="msg"><i>Updated Successfully</i></h2>
     <div class="form-container">
-      <form action="" method="POST">
+      <form action="/books" method="POST">
         {% csrf_token %}
         <fieldset>
           <legend>Enter Details of Book:</legend>
@@ -255,16 +261,17 @@
             <option value="nobels">Stories/Nobels</option>
             <option value="calculation">Calculations</option>
             <option value="computer">computer</option>
-            <option value="others" selected>Others</option> </select>
-          ><br />
+            <option value="others" selected >Others</option> </select>
+          <br />
           <label for="shelf">Shelf No. : </label>
           <input type="text" id="shelf" name="shelf" required /><br /><br />
           <label for="quantity">Quantity Available : </label>
           <input type="number" id="quantity" name="quantity" required /><br /><br />
-          <input type="submit" id="submitbtn" value="Add Book" />
+          <button type="submit" id="submitbtn">Add Book</button>
           <input type="reset" id="resetbtn" value="Close Form" />
         </fieldset>
       </form>
+
     </div>
   </div>
 </main>
@@ -281,7 +288,6 @@
   submitForm();
 
   function submitForm() {
-    let id = 1;
     const tbody = document.querySelector("#tbody");
 
     submitBtn.addEventListener("click", (e) => {
@@ -292,6 +298,7 @@
       const shelfNo = document.querySelector("#shelf").value;
       const quantity = document.querySelector("#quantity").value;
 
+      
       if (
         title.trim() === "" ||
         author.trim() === "" ||
@@ -305,7 +312,7 @@
      
       // console.log("success");
       clearForm();
-      formContainer.style.display = "none";
+      //formContainer.style.display = "none";
       setMessage();
     });
   }
@@ -322,7 +329,7 @@
   function clearForm() {
     document.querySelector("#title").value = "";
     document.querySelector("#author").value = "";
-    document.querySelector("#book-types").value = "";
+    document.querySelector("#book-types").value = "others";
     document.querySelector("#shelf").value = "";
     document.querySelector("#quantity").value = "";
   }
@@ -335,5 +342,7 @@
     }
   }
 </script>
+
+
 {% endblock main %} 
 {% block footer %}{% endblock footer %}

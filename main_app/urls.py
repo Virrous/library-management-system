@@ -22,7 +22,4 @@ urlpatterns = [
      path('issueBook/', views.issueBook, name='issueBook'),
      
      path('reports/', views.reports, name='reports'),
-     
-     path('settings/', views.settings, name='settings'),
-     
 ]

@@ -3,7 +3,8 @@ from django.shortcuts import render,redirect
 # from .models import login_detail
 # from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 # from django.contrib.auth import login, authenticate,logout
-from .models import Book
+from .models import *
+from .forms import BookForm
 
 # Create your views here.
 def index(request):
@@ -35,7 +36,9 @@ def form(request):
 #     return redirect('/form')
 
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    books = Book.objects.all()
+    students = Student.objects.all()
+    return render(request, 'dashboard.html',{'books':books,'students':students})
 
 def issueBook(request):
     return render(request, 'issueBook.html')
@@ -47,23 +50,26 @@ def issueBook(request):
 #     return render(request, 'books.html', {'books': books})
 
 def books(request):
-    # return render(request, 'books.html')
+    
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('books')  # Redirect to the same page to see the updated list
+    else:
+        form = BookForm()
+        # print(form.errors)
+        
     books = Book.objects.all()
-    return render(request, 'books.html', {'books': books})
+    return render(request, 'books.html', {'books': books,'form': form})
 
 def add_book(request):
-    book_item =(title = request.POST['title'],
-                 author = request.POST['author'],
-                 type = request.POST['types'],
-                 quantity = request.POST['quantity'])
-    book_item.save()
-    return redirect('/books')
+   pass
 
 def students(request):
-    return render(request, 'student.html')
+    students = Student.objects.all()
+    return render(request, 'student.html', {'students':students})
 
 def reports(request):
     return render(request, 'reports.html')
 
-def settings(request):
-    return render(request, 'settings.html')

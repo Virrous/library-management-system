@@ -27,11 +27,11 @@ class Book(models.Model):
         return self.title
         
 
-# class Student(models.Model):
-#     name = models.CharField(max_length=100)
-#     address = models.CharField(max_length=100)
-#     email = models.EmailField(max_length=50)
-#     contact = models.PositiveBigIntegerField()
+class Student(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+    email = models.EmailField(max_length=50)
+    contact = models.PositiveBigIntegerField()
     
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return self.name

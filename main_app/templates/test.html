@@ -55,3 +55,71 @@
     </td>
     </tr>`;
       id++;
+
+
+
+      {% comment %} script for books.html {% endcomment %}
+      const formContainer = document.querySelector(".form-container");
+      const Bookbtn = document.querySelector("#book-btn");
+      const submitBtn = document.querySelector("#submitbtn");
+      const resetBtn = document.querySelector("#resetbtn");
+      const EditBtn = document.querySelectorAll(".Edit");
+      const DeleteBtn = document.querySelectorAll(".Delete");
+    
+      displayForm();
+      submitForm();
+    
+      function submitForm() {
+        let id = 1;
+        const tbody = document.querySelector("#tbody");
+    
+        submitBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const title = document.querySelector("#title").value;
+          const author = document.querySelector("#author").value;
+          const type = document.querySelector("#book-types").value;
+          const shelfNo = document.querySelector("#shelf").value;
+          const quantity = document.querySelector("#quantity").value;
+    
+          if (
+            title.trim() === "" ||
+            author.trim() === "" ||
+            type.trim() === "" ||
+            shelfNo.trim() === "" ||
+            quantity <= 0
+          ) {
+            alert("Please fill in all fields with valid data.");
+            return;
+          }
+         
+          // console.log("success");
+          clearForm();
+          formContainer.style.display = "none";
+          setMessage();
+        });
+      }
+    
+      function displayForm() {
+        Bookbtn.addEventListener("click", () => {
+          formContainer.style.display = "block";
+        });
+        resetBtn.addEventListener("click", () => {
+          // location.reload();
+          formContainer.style.display = "none";
+        });
+      }
+      function clearForm() {
+        document.querySelector("#title").value = "";
+        document.querySelector("#author").value = "";
+        document.querySelector("#book-types").value = "";
+        document.querySelector("#shelf").value = "";
+        document.querySelector("#quantity").value = "";
+      }
+      function setMessage() {
+        const msg = document.querySelector("#msg");
+        msg.style.display = "block";
+        setTimeout(message, 2000);
+        function message() {
+          msg.style.display = "none";
+        }
+      }
