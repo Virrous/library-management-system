@@ -246,7 +246,7 @@
 
     <h2 id="msg"><i>Updated Successfully</i></h2>
     <div class="form-container">
-      <form action="/books" method="POST">
+      <form action="" method="post">
         {% csrf_token %}
         <fieldset>
           <legend>Enter Details of Book:</legend>
@@ -287,10 +287,10 @@
   displayForm();
   submitForm();
 
-  function submitForm() {
+  {% comment %} function submitForm() {
     const tbody = document.querySelector("#tbody");
 
-    submitBtn.addEventListener("click", (e) => {
+  submitBtn.addEventListener("click", (e) => {
       e.preventDefault();
       const title = document.querySelector("#title").value;
       const author = document.querySelector("#author").value;
@@ -315,7 +315,7 @@
       //formContainer.style.display = "none";
       setMessage();
     });
-  }
+  }{% endcomment %}
 
   function displayForm() {
     Bookbtn.addEventListener("click", () => {
@@ -325,7 +325,7 @@
       // location.reload();
       formContainer.style.display = "none";
     });
-  }
+  } 
   function clearForm() {
     document.querySelector("#title").value = "";
     document.querySelector("#author").value = "";

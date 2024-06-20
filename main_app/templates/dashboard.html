@@ -109,28 +109,33 @@
           margin-right: 2vw;
          }
          .manage{
-          width: 15vw;
-           height: 8vh;
+          width: 16vw;
+          height:4vh;
            /*border: 1px solid #271ad6;*/
            border-radius: 5px;
            background-color: #d6c9c9;
            padding:4vw;
-           text-align: center;
+          /* text-align: center;*/
            z-index:99;
            margin-left: 8vw;
            margin-top: 3vh;
-           padding-button: 7vw;
+           padding-bottom: 8vw;
           
            cursor: pointer;
          }
          .manage img{
-          width: 1.6vw;
+          width: 4vw;
         margin-left: 0.5vw;
         margin-right: 0.5vw;
-        margin-button: 0.5vh;
+        margin-bottom: 0.5vh;
         margin-top: 0.2vh;
          }
          
+         .manage p {
+          font-size: larger;
+          font-weight:7px;
+          /*margin-bottom:7vw;*/
+         }
 
     </style>
         <div id="top-header">
@@ -185,13 +190,13 @@
               </label>
               <p>Issued books</p>
             </button>
-            <button class="manage" id="Addbooks">
+            <button class="manage" id="AddBooks">
               <label for="book">
                 <img src="/static/inside book icon.png" alt="" />
               </label>
               <p>Add books</p>
             </button>
-            <button class="manage" id="AddStds">
+            <button class="manage" id="AddStudents">
               <label for="book">
                 <img src="/static/reading-book.png" alt="">
               </label>
@@ -202,5 +207,17 @@
 
     
    </main>
+   <script>
+      document.querySelector('#Issued').addEventListener('click',()=>{
+        window.location.href = '/issueBook/';
+      });
+      document.querySelector('#AddBooks').addEventListener('click',()=>{
+        window.location.href = '/books/';
+      });
+      document.querySelector('#AddStudents').addEventListener('click',()=>{
+        window.location.href = '/students/';
+      });
+
+   </script>
  {% endblock main %}
  {% block footer %}{% endblock footer %}
