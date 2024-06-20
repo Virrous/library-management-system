@@ -35,3 +35,12 @@ class Student(models.Model):
     
     def __str__(self):
         return self.name
+    
+class Issued_Book(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    issue_date = models.DateField(auto_now_add=True)
+    return_date = models.DateField(null=True, blank=True)
+    
+    def __str__(self):
+        return f"{self.book} issued to {self.student}"
