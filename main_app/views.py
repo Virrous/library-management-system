@@ -1,8 +1,6 @@
-from django.shortcuts import render,redirect
-# from django.contrib.auth import authenticate
-# from .models import login_detail
-# from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-# from django.contrib.auth import login, authenticate,logout
+from django.shortcuts import render,redirect,HttpResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login
 from .models import *
 from .forms import BookForm
 
@@ -15,6 +13,29 @@ def get_started():
 
 
 def form(request):
+    if request.method=='POST':
+        if 'register' in request.POST:
+            username = request.POST.get('username')
+            email = request.POST.get('email')
+            passwd = request.POST.get('pswd')
+            my_user = User.objects.create_user(username,email,passwd)
+            my_user.save()
+            # print(username,email,password)
+            return redirect('form')
+        
+        elif 'login' in request.POST:
+            login_username = request.POST.get('login_username')
+            password1 = request.POST.get('password')
+            re_password = request.POST.get('re_password')
+            # if password != re_password:
+            #     return redirect('form')
+            user = authenticate(request,username=login_username,password=password1)
+            # print (f"value of user {user}") # type: ignore
+            if user is not None:
+                login(request,user)
+                return redirect('dashboard')
+            else:
+                return HttpResponse ('incorrect!!')
     return render(request, 'form.html')
 
 # def login_view(request):
@@ -57,7 +78,7 @@ def books(request):
         form = BookForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('books')  # Redirect to the same page to see the updated list
+            return redirect('/books')  # Redirect to the same page to see the updated list
     else:
         form = BookForm()
         # print(form.errors)
@@ -69,9 +90,29 @@ def add_book(request):
    pass
 
 def students(request):
+    try:
+        if request.method == 'POST':
+            name = request.POST.get('name')
+            address = request.POST.get('address')
+            contact = request.POST.get('contact')
+            email = request.POST.get('email')
+            
+            if name and address and contact and email:
+                student_item = Student(name=name, address=address, contact=contact, email=email)
+                student_item.save()
+                return redirect('students/') 
+    except:
+        pass
+
     students = Student.objects.all()
     return render(request, 'student.html', {'students':students})
 
 def reports(request):
     return render(request, 'reports.html')
 
+# def handle_request_data(request):
+#     try:
+#         name = request.POST['name']
+#     except MultiValueDictKeyError:
+#         name = None  # Handle the case where 'name' is not in the request.POST
+#     return name

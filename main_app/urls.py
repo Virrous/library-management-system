@@ -6,11 +6,11 @@ from main_app import  views
 urlpatterns = [
      path("", views.index, name='index'),
      
-     path("get_started/", views.get_started, name='get_started'),
+     # path("get_started/", views.get_started, name='get_started'),
      
      path("form/", views.form, name='form'),
      
-     path("dashboard/", views.dashboard, name='dashboard'),
+     path("dashboard", views.dashboard, name='dashboard'),
      
      path('books/', views.books, name='books'),
      

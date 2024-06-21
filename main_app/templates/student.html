@@ -138,7 +138,7 @@
           }
 
           #top-header {
-            width: 160%;
+            width: 155%;
             height: 16vh;
             display: flex;
             position: relative;
@@ -242,19 +242,20 @@
       <h2 id="total_students">Total Students: {{students|length}}</h2>
       <h2 id="msg"><i>Updated Successfully</i></h2>
       <div class="form-container">
-        <form action="">
+        <form action="{% url "students" %}" method="post">
+          {% csrf_token %}
           <fieldset>
             <legend>Enter Details of Book:</legend>
             <br />
             <label for="name">Full Name: </label>
-            <input type="text" id="name" required /><br /><br />
+            <input type="text" id="name" name="full_name" required /><br /><br />
             <label for="address">Address:</label>
-            <input type="text" id="address" required /><br /><br />
+            <input type="text" id="address" name='address' required /><br /><br />
             <label for="email">Email: </label>
-            <input type="email" id="email" required /><br /><br />
+            <input type="email" id="email" name='email' required  /><br /><br />
             <label for="contact">Contact:</label>
-            <input type="number" id="contact" required /><br /><br />
-            <input type="submit" id="submitbtn" value="Add Student" />
+            <input type="number" id="contact" name='contact' required /><br /><br />
+            <input type="submit" id="submitbtn" name='submitbtn' value="Add Student" />
             <input type="reset" id="resetbtn" value="Close Form" />
           </fieldset>
         </form>
@@ -266,67 +267,68 @@
 
 <script>
 
-    const formContainer = document.querySelector(".form-container");
-var studentbtn = document.querySelector("#student-btn");
-const submitBtn = document.querySelector("#submitbtn");
-const resetBtn = document.querySelector("#resetbtn");
-const EditBtn = document.querySelectorAll(".Edit");
-const DeleteBtn = document.querySelectorAll(".Delete");
-// let ariaRequired=false;
+  const formContainer = document.querySelector(".form-container");
+  var studentbtn = document.querySelector("#student-btn");
+  const submitBtn = document.querySelector("#submitbtn");
+  const resetBtn = document.querySelector("#resetbtn");
+  const EditBtn = document.querySelectorAll(".Edit");
+  const DeleteBtn = document.querySelectorAll(".Delete");
+  // let ariaRequired=false;
 
-displayForm();
-submitForm();
+  displayForm();
+  submitForm();
 
-function submitForm() {
-  let id = 1;
-  const tbody = document.querySelector("#tbody");
+  {% comment %} function submitForm() {
+    let id = 1;
+    const tbody = document.querySelector("#tbody");
 
-  submitBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    const name = document.querySelector("#name").value;
-    const address = document.querySelector("#address").value;
-    const email = document.querySelector("#email").value;
-    const contact = document.querySelector("#contact").value;
+    submitBtn.addEventListener("click", (e) => {
+      //e.preventDefault();
+      const name = document.querySelector("#name").value;
+      const address = document.querySelector("#address").value;
+      const email = document.querySelector("#email").value;
+      const contact = document.querySelector("#contact").value;
 
-    if (
-      name.trim() === "" ||
-      address.trim() === "" ||
-      email.trim() === "" ||
-      contact <= 0
-    ) {
-      alert("Please fill in all fields with valid data.");
-      return;
-    }
-    clearForm();
-    formContainer.style.display = "none";
-    setMessage();
-  });
-}
+      if (
+        name.trim() === "" ||
+        address.trim() === "" ||
+        email.trim() === "" ||
+        contact <= 0
+      ) {
+        alert("Please fill in all fields with valid data.");
+        return;
+      }
+      clearForm();
+      formContainer.style.display = "none";
+      setMessage();
+      //e.submitBtn;
+    });
+  } {% endcomment %}
 
-function displayForm() {
-  studentbtn.addEventListener("click", () => {
-    console.log("clicked");
-    formContainer.style.display = "block";
-  });
-  resetBtn.addEventListener("click", () => { 
-    // location.reload();
-    formContainer.style.display = "none";
-  });
-}
-function clearForm() {
-  document.querySelector("#name").value = "";
-  document.querySelector("#address").value = "";
-  document.querySelector("#email").value = "";
-  document.querySelector("#contact").value = "";
-}
-function setMessage() {
-  const msg = document.querySelector("#msg");
-  msg.style.display = "block";
-  setTimeout(message, 2000);
-  function message() {
-    msg.style.display = "none";
+  function displayForm() {
+    studentbtn.addEventListener("click", () => {
+      console.log("clicked");
+      formContainer.style.display = "block";
+    });
+    resetBtn.addEventListener("click", () => { 
+      // location.reload();
+      formContainer.style.display = "none";
+    });
   }
-}
+  function clearForm() {
+    document.querySelector("#name").value = "";
+    document.querySelector("#address").value = "";
+    document.querySelector("#email").value = "";
+    document.querySelector("#contact").value = "";
+  }
+  function setMessage() {
+    const msg = document.querySelector("#msg");
+    msg.style.display = "block";
+    setTimeout(message, 2000);
+    function message() {
+      msg.style.display = "none";
+    }
+  }
 </script>
 {% endblock main %}
 {% block footer %}{% endblock footer %}
