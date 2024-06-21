@@ -25,11 +25,11 @@ def form(request):
         
         elif 'login' in request.POST:
             login_username = request.POST.get('login_username')
-            password = request.POST.get('password')
+            password1 = request.POST.get('password')
             re_password = request.POST.get('re_password')
             # if password != re_password:
             #     return redirect('form')
-            user = authenticate(request,username=login_username,password=password)
+            user = authenticate(request,username=login_username,password=password1)
             # print (f"value of user {user}") # type: ignore
             if user is not None:
                 login(request,user)

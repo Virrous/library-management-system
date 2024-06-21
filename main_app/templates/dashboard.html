@@ -49,8 +49,8 @@
           color: #fff;
           font-size: large;
           font-style: italic;
-          width: 20vw;
-          /* height: 4vh; */
+          width: 21vw;
+          height: 5vh; 
           border: 1px solid #3498db;
           border-radius: 20px;
         }
@@ -107,10 +107,25 @@
           border:1px solid red;
           border-radius: 5px;
           margin-right: 2vw;
+          text-align: center;
+         }
+         .summary{
+          margin-top: 2vh;
+          font-size: larger;
+         }
+         #text{
+          margin-top: 2.5vw;
+
+         }
+         #issues{
+          color: green;
+         }
+         #return{
+          color: red;
          }
          .manage{
-          width: 15vw;
-           height: 8vh;
+          width: 17vw;
+           height: 6vh;
            /*border: 1px solid #271ad6;*/
            border-radius: 5px;
            background-color: #d6c9c9;
@@ -119,17 +134,20 @@
            z-index:99;
            margin-left: 8vw;
            margin-top: 3vh;
-           padding-button: 7vw;
+           padding-bottom: 7vw;
           
            cursor: pointer;
          }
          .manage img{
-          width: 1.6vw;
+          width: 3vw;
         margin-left: 0.5vw;
         margin-right: 0.5vw;
-        margin-button: 0.5vh;
+        margin-bottom: 0.5vh;
         margin-top: 0.2vh;
          }
+        .manage p{
+          font-size: large;
+        }
          
 
     </style>
@@ -175,7 +193,11 @@
                 <p>Out of Stock</p>
               </div>
             </div>
-            <div id="todays-report"></div>
+            <div id="todays-report">
+              <p id="text" class="summary"><b>Today's Summary</b></p>
+              <p id="issues" class="summary">Total issues:{{issues|length}}</p>
+              <p id="return" class="summary">Total returns: 0 </p>
+            </div>
           </div>
 
           <div id="redirect">
