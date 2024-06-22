@@ -92,10 +92,12 @@
          .all-data label{
           color: red; 
           font-size: larger;
+          margin-bottom: 1vh;
+          
          }
-         .all-data p{
-          margin-top: 1vh;
-         }
+         /* .all-data p{
+          margin-top: 0.3vh;
+         } */
          .all-data:hover{
           background-color: #ebdede;
            border: 0.5px solid #d6c9c9;
@@ -148,6 +150,19 @@
         .manage p{
           font-size: large;
         }
+        .all-data img{
+          width: 1vw;
+          height: 3vh;
+          margin-left: 0.3vw;
+          /* margin-top:0.5vh; */
+          
+           /* 
+          margin-right: 0.5vw;
+          margin-bottom: 0.3vh; 
+          margin-top: 0.4vh;   */
+          
+          
+        }
          
 
     </style>
@@ -167,29 +182,39 @@
           <div id="page1">
             <div id="total-data">
               <div class="all-data" id="total-book">
-                <label for="book">{{books|length}}</label>
+                <label for="book">{{books|length}}
+                  <img src="/static/Down Traingle.png" alt="" />
+                </label>
                 <p>Total Books</p>
               </div>
               <div class="all-data" id="total-student">
-                <label for="student">{{students|length}}
-                  
-                </label>
+                <label for="student">{{students|length}}</label>
+                  <img src="/static/Down Traingle.png" alt="" />
+
                 <p>Total Students</p>
               </div>
               <div class="all-data" id="issued-book">
-                <label for="book">{{issues|length}}</label>
+                <label for="book">{{issues|length}}
+                  <img src="/static/Down Traingle.png" alt="" />
+                </label>
                 <p>Issued Books</p>
               </div>
               <div class="all-data" id="returned-book">
-                <label for="book">0</label>
+                <label for="book">0
+                  <img src="/static/Down Traingle.png" alt="" />
+                </label>
                 <p>Returned Books</p>
               </div>
               <div class="all-data" id="passive">
-                <label for="book">0</label>
+                <label for="book">0
+                  <img src="/static/Down Traingle.png" alt="" />
+                </label>
                 <p>Available Books</p>
               </div>
               <div class="all-data" id="out-of-stock">
-                <label for="book">0</label>
+                <label for="book">0
+                  <img src="/static/Down Traingle.png" alt="" />
+                </label>
                 <p>Out of Stock</p>
               </div>
             </div>
@@ -203,7 +228,7 @@
           <div id="redirect">
             <button class="manage" id="Issued">
               <label for="book">
-                <img src="/static/inside book icon.png" alt="" />
+                <img src="/static/image.png" alt="" />
               </label>
               <p>Issued books</p>
             </button>
