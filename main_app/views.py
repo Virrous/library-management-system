@@ -66,23 +66,15 @@ def issueBook(request):
     issues = Issued_Book.objects.all()
     return render(request, 'issueBook.html',{'issues':issues})
 
-    
-  
-# def book_list(request):
-#     books = Book.objects.all()
-#     return render(request, 'books.html', {'books': books})
-
 def books(request):
     
     if request.method == 'POST':
         form = BookForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/books')  # Redirect to the same page to see the updated list
+            return redirect('/books')  
     else:
         form = BookForm()
-        # print(form.errors)
-        
     books = Book.objects.all()
     return render(request, 'books.html', {'books': books,'form': form})
 

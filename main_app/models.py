@@ -1,7 +1,4 @@
-from django.db import models
-# from django import forms
-
-# Create your models here.
+from django.db import models.
 class Book(models.Model):
     FICTION = 'fiction'
     NOVELS = 'nobels'
