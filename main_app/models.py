@@ -1,4 +1,5 @@
-from django.db import models.
+from django.db import models
+
 class Book(models.Model):
     FICTION = 'fiction'
     NOVELS = 'nobels'

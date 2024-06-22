@@ -140,7 +140,7 @@
       padding-left: 0.2vw;
     }
     #top-header {
-      width: 135%;
+      width: 130%;
       height: 16vh;
       display: flex;
       position: relative;
@@ -202,8 +202,11 @@
           <p>Manage your books and add new ones!</p>
       </div>
       <div id="searchBar">
-        <input type="text" placeholder="Search.." />
+        <form method='post'>
+          {% csrf_token %}
+        <input type="text" placeholder="Search.." name='query' value='{{query}}'/>
         <button id="search">🔍</button>
+        </form>
       </div>
     </div>
     <button id="book-btn">Add Book</button>
@@ -221,24 +224,29 @@
           </tr>
         </thead>
         <tbody id="tbody">
-          {% for book in books%}
-         <tr>
-          <td>{{book.id}}</td>
-          <td>{{book.title}}</td>
-          <td>{{book.author}}</td>
-          <td>{{book.get_type_display}}</td>
-          <td>{{book.shelf}}</td>
-          <td>{{book.quantity}}</td>
-           <td>
-            <button class="Edit">
-              <img src="/static/edit icon.png" alt="" />
-            </button>
-            <button class="Delete">
-              <img src="/static/delete icon.png" alt="" />
-            </button>
-          </td>
-        </tr>
-         {% endfor %}
+          {% for book in books %}
+          <tr>
+              <td>{{ book.id }}</td>
+              <td>{{ book.title }}</td>
+              <td>{{ book.author }}</td>
+              <td>{{ book.get_type_display }}</td>
+              <td>{{ book.shelf }}</td>
+              <td>{{ book.quantity }}</td>
+              <td>
+                  <button class="Edit">
+                      <img src="/static/edit icon.png" alt="Edit" />
+                  </button>
+                  <form action="" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="book_id" value="{{ book.id }}">
+                    <input type="hidden" name="delete_book" value="delete">
+                    <button type='submit' class='Delete'>
+                      <img src="/static/delete icon.png" alt="Delete" />
+                      </button>
+                  </form>
+              </td>
+          </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>
@@ -267,7 +275,7 @@
           <input type="text" id="shelf" name="shelf" required /><br /><br />
           <label for="quantity">Quantity Available : </label>
           <input type="number" id="quantity" name="quantity" required /><br /><br />
-          <button type="submit" id="submitbtn">Add Book</button>
+          <button type="submit" id="submitbtn" name='add_another'>Add Book</button>
           <input type="reset" id="resetbtn" value="Close Form" />
         </fieldset>
       </form>
@@ -341,6 +349,19 @@
       msg.style.display = "none";
     }
   }
+
+  //for edit and delete operation
+   {% comment %} function editDeleteOperation(){
+    const bookList = document.querySelector("#book-list");
+    const bookItems = bookList.children;
+    Array.from(bookItems).forEach((bookItem) => {
+      const editButton = bookItem.querySelector(".edit");
+      const deleteButton = bookItem.querySelector(".delete");
+
+    }
+
+  } {% endcomment %}
+      
 </script>
 
 

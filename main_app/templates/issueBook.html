@@ -85,6 +85,13 @@ input{
   padding: 0.5vh;
   margin-bottom: 10px;
 }
+select{
+  width: 12vw;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5vh;
+  margin-bottom: 10px;
+}
 input[type='date']{
   width: 10vw;
   padding: 1vh;
@@ -150,7 +157,7 @@ button[type="submit"]:hover {
   cursor: pointer;
   padding-left: 0.2vw;
 }
-#key-dialogBox{
+{% comment %} #key-dialogBox{
   width: 25vw;
   height: 30vh;
   background-color: #fff;
@@ -185,7 +192,7 @@ button[type="submit"]:hover {
   margin:1vw 0 0 8vw;
   border-radius:20px;
   font-size:1vw;
-}
+} {% endcomment %}
   </style>
   <div id="page1">
     <div id="top-header">
@@ -197,41 +204,51 @@ button[type="submit"]:hover {
         <p>Manage your issued books!</p>
       </div>
       <div id="searchBar">
-        <input type="text" placeholder="Search.." />
+        <form method='post'>
+          {% csrf_token %}
+        <input type="text" placeholder="Search.." name='query' value='{{query}}' />
         <button id="search">🔍</button>
+        </form>
       </div>
     </div>
-    <div id="key-dialogBox">
+    {% comment %} <div id="key-dialogBox">
       <form action="">
         <label for="Message">Please Enter the Issue Key</label><br><br>
         <input type="password"><br>
         <button for="submit" id="issue-prompt">Issue</button><br>
         <button>Close Box</button>
       </form>
-    </div>
+    </div> {% endcomment %}
     <div class="form-container">
-      <form action="">
+      <form action="" method='post'>
+        {% csrf_token %}
         <fieldset>
           <legend>Enter the required details</legend>
           <br />
-          <label for="book-id">Book ID : </label>
-          <input type="number" name="book-id" id="book-id"required />
-          <label for="title">Book Title : </label>
-          <input type="text" id="title"name='title' required />
-          <br><br>
-           <label for="student-id">Student ID :</label> 
-           <input type="number" id="student-id" name="student-id" required/>
-           <label for="student-name">Student Name :</label>
-           <input type="text" name="name" id="student-name" required/>
-           <br><br>
-           <label for="issue-date">Issue Date : </label>
-           <input type="date" id="issue-date" name="issue-date"required/>
-           <label for="return-date">Return Date :</label>
-           <input type="date" id="return-date" name="return-date" >
-           <br><br>
-           <button type="submit" id="issue-btn">Submit</button>
+          <label for="book_id">Book Title:</label>
+          <select name="book_id" id="book_id" required>
+              {% for book in books %}
+                  <option value="{{ book.id }}">{{ book.title }}</option>
+              {% endfor %}
+          </select><br>
+          
+          <label for="student_id">Student Name:</label>
+          <select name="student_id" id="student_id" required>
+              {% for student in students %}
+                  <option value="{{ student.id }}">{{ student.name }}</option>
+              {% endfor %}
+          </select><br>
+          
+          <label for="issue_date">Issue Date:</label>
+          <input type="date" name="issue_date" id="issue_date" required><br>
+          
+          <label for="return_date">Return Date:</label>
+          <input type="date" name="return_date" id="return_date"><br>
+          
+          <button type="submit" name='add_another'>Issue Book</button>
         </fieldset>
       </form>
+
     </div>
     <h1 id="table-name">List of Issued Books</h1>
     <div id="table-container">
@@ -260,9 +277,15 @@ button[type="submit"]:hover {
           <button class="Edit">
             <img src="/static/edit icon.png" alt="" />
           </button>
-          <button class="Delete">
-            <img src="/static/delete icon.png" alt="" />
-          </button>
+          <form action="" method="post" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="book_id" value="{{ details.book.id }}">
+            <input type="hidden" name="student_id" value="{{ details.student.id }}">
+            <input type="hidden" name="delete_issue" value="delete">
+            <button type='submit' class='Delete'>
+              <img src="/static/delete icon.png" alt="Delete" />
+              </button>
+          </form>
         </td>
         </tr>
         {% endfor %}
@@ -271,7 +294,7 @@ button[type="submit"]:hover {
     </div>
   </div>
 </main>
-<script>
+{% comment %} <script>
   const issueBtn = document.querySelector("#issue-btn");
   const issuePrompt = document.querySelector("#issue-prompt");
   const dialogBox = document.querySelector("#key-dialogBox");
@@ -280,5 +303,5 @@ button[type="submit"]:hover {
     dialogBox.style.display='block';
   })
 
-</script>
+</script> {% endcomment %}
 {% endblock main %}

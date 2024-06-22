@@ -120,7 +120,7 @@
       <input type="checkbox" id="chk" />
 
       <div class="signup">
-        <form method="POST">
+        <form method="post">
 		  	{% csrf_token %}
           <label for="chk">Sign up</label>
           <input type="text" name="username" placeholder="Username" required="" />
@@ -131,12 +131,12 @@
             placeholder="Password"
             required=""
           />
-          <button class="button1" type="submit" name='register' value="signup">Sign up</button>
+          <button class="button1" type="submit" name='register'>Sign up</button>
         </form>
       </div>
 
       <div class="login">
-        <form method="POST" action="/dashboard">
+        <form method="post" action="">
           {% csrf_token %}
           <label for="chk">Login</label>
           <!-- aria-hidden="true" -->
@@ -154,7 +154,7 @@
             required=""
           />
 
-          <button class="button2" type="submit" name='login' value="login">Login</button>
+          <button class="button2" type="submit" name='login' >Login</button>
         </form>
       </div>
     </div>
