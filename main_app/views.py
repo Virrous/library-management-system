@@ -2,7 +2,6 @@ from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 from .models import *
-from .forms import BookForm
 
 # Create your views here.
 def index(request):
@@ -75,13 +74,14 @@ def issueBook(request):
 def books(request):
     
     if request.method == 'POST':
-        form = BookForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/books')  # Redirect to the same page to see the updated list
-    else:
-        form = BookForm()
-        # print(form.errors)
+       title=request.POST.get('title')
+       author=request.POST.get('author')
+       type = request.POST.get('types')
+       shelf=request.POST.get('shelf')
+       quantity=request.POST.get('quantity')
+    #    print(title,author,type,shelf,quantity)
+       book_item=Book(title=title,author=author,type=type,shelf=shelf,quantity=quantity)
+       book_item.save()
         
     books = Book.objects.all()
     return render(request, 'books.html', {'books': books,'form': form})
