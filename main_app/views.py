@@ -97,12 +97,9 @@ def students(request):
             contact1 = request.POST.get('contact')
             email1 = request.POST.get('email')
             # print(name1,address1,contact1,email1)
-            
-            #if name and address and contact and email:
-            student_item = Student(name=name1, address=address1, contact=contact1, email=email1)
-            print(student_item)
+            student_item = Student(name=name1, address=address1,email=email1,contact=contact1)
+            # print(student_item)
             student_item.save()
-            return redirect('students/') 
     except:
         pass
         
