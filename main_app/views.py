@@ -92,18 +92,20 @@ def add_book(request):
 def students(request):
     try:
         if request.method == 'POST':
-            name = request.POST.get('name')
-            address = request.POST.get('address')
-            contact = request.POST.get('contact')
-            email = request.POST.get('email')
+            name1 = request.POST.get('name')
+            address1 = request.POST.get('address')
+            contact1 = request.POST.get('contact')
+            email1 = request.POST.get('email')
+            # print(name1,address1,contact1,email1)
             
-            if name and address and contact and email:
-                student_item = Student(name=name, address=address, contact=contact, email=email)
-                student_item.save()
-                return redirect('students/') 
+            #if name and address and contact and email:
+            student_item = Student(name=name1, address=address1, contact=contact1, email=email1)
+            print(student_item)
+            student_item.save()
+            return redirect('students/') 
     except:
         pass
-
+        
     students = Student.objects.all()
     return render(request, 'student.html', {'students':students})
 
