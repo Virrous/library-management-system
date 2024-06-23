@@ -274,9 +274,9 @@ button[type="submit"]:hover {
         <td>{{details.issue_date}}</td>
         <td>{{details.return_date}}</td>
         <td>
-          <button class="Edit">
+          {% comment %} <button class="Edit">
             <img src="/static/edit icon.png" alt="" />
-          </button>
+          </button> {% endcomment %}
           <form action="" method="post" style="display:inline;">
             {% csrf_token %}
             <input type="hidden" name="book_id" value="{{ details.book.id }}">
@@ -290,6 +290,7 @@ button[type="submit"]:hover {
         </tr>
         {% endfor %}
       </tbody>
+      
      </table>
     </div>
   </div>

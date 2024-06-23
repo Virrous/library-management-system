@@ -189,6 +189,16 @@
             font-size: large;
             cursor: pointer;
           }
+          #edit_form{
+            position: fixed;
+            z-index: 99;
+            top: 25vh;
+            left:50vw;
+            width: 30vw;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            display: none;
+          }
     </style>
 
     <div id="page1">
@@ -208,12 +218,30 @@
           </form>
         </div>
       </div>
+      <div id='edit_form'>
+        <form action="" method='post'>
+          {%csrf_token%}
+          <fieldset>
+            <legend>Edit Student</legend>
+            <input type="hidden" id="edit_student_id" name="student_id" value="" />
+            <label for="edit_name">Full Name: </label>
+            <input type="text" id="edit_name" name="name" required /><br /><br />
+            <label for="edit_address">Address:</label>
+            <input type="text" id="edit_address" name="address" required /><br /><br />
+            <label for="edit_email">Email: </label>
+            <input type="email" id="edit_email" name="email" required /><br /><br />
+            <label for="edit_contact">Contact:</label>
+            <input type="number" id="edit_contact" name="contact" required /><br /><br />
+            <input type="submit" id="submitbtn" name='edit_form' value="Update Student" />
+          </fieldset>
+        </form>
+      </div>
       <button id="student-btn">Add Student</button>
       <div class="table-container">
         <table cellspacing="20" cellpadding="10">
           <thead id="thead">
             <tr>
-              <th>S.N.</th>
+              <th>ID</th>
               <th>Name</th>
               <th>Address</th>
               <th>Email</th>
@@ -230,9 +258,10 @@
               <td>{{ student.contact }}</td>
               <td>{{ student.email }}</td>
               <td>
-                  <button class="Edit">
+                  <button class="Edit" data-student-id="{{ student.id }}">
                       <img src="/static/edit icon.png" alt="Edit" />
                   </button>
+
                   <form action="" method="post" style="display:inline;">
                     {% csrf_token %}
                     <input type="hidden" name="student_id" value="{{ student.id }}">
@@ -253,7 +282,7 @@
         <form action="{% url "students" %}" method="post">
           {% csrf_token %}
           <fieldset>
-            <legend>Enter Details of Book:</legend>
+            <legend>Enter Details of Student:</legend>
             <br />
             <label for="name">Full Name: </label>
             <input type="text" id="name" name="name" required /><br /><br />
@@ -279,12 +308,11 @@
   var studentbtn = document.querySelector("#student-btn");
   const submitBtn = document.querySelector("#submitbtn");
   const resetBtn = document.querySelector("#resetbtn");
-  const EditBtn = document.querySelectorAll(".Edit");
-  const DeleteBtn = document.querySelectorAll(".Delete");
+  
   // let ariaRequired=false;
 
   displayForm();
-  submitForm();
+  {% comment %} submitForm(); {% endcomment %}
 
   {% comment %} function submitForm() {
     let id = 1;
@@ -311,7 +339,7 @@
       setMessage();
       //e.submitBtn;
     });
-  } {% endcomment %}
+  }  {% endcomment %}
 
   function displayForm() {
     studentbtn.addEventListener("click", () => {
@@ -337,6 +365,27 @@
       msg.style.display = "none";
     }
   }
+  document.addEventListener('DOMContentLoaded', function () {
+    const editButtons = document.querySelectorAll(".Edit");
+    const editForm = document.getElementById("edit_form");
+
+    editButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const studentId = this.dataset.studentId;
+            fetch(`/students/${studentId}/edit/`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("edit_student_id").value = data.id;
+                    document.getElementById("edit_name").value = data.name;
+                    document.getElementById("edit_address").value = data.address;
+                    document.getElementById("edit_email").value = data.email;
+                    document.getElementById("edit_contact").value = data.contact;
+                    editForm.style.display = 'block';
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    });
+});
 </script>
 {% endblock main %}
 {% block footer %}{% endblock footer %}

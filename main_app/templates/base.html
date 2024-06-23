@@ -65,6 +65,19 @@
       body{
         background: #c4bfbf;
       }
+      #logout_btn{
+        position: absolute;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        margin-left: 3.5vw;
+        margin-right: 0.5vw;
+        margin-top: 1vh;
+      }
+      #logout_btn img{
+        width: 3vw;
+       
+      }
     </style>
   </head>
   <body>
@@ -95,8 +108,8 @@
                 <a href="/students">Students</a>
             </li>
             <li>
-                <img src="/static/student-24.ico" alt="" />
-                <a href="/reports">Report</a>
+                <button id='logout_btn'><a href="{% url 'logout' %}"><img src="/static/logout.png" alt="" /></a></button>
+
             </li>
         </ul>
         

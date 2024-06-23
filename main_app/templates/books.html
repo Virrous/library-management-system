@@ -191,6 +191,16 @@
       font-size: large;
       cursor: pointer;
     }
+    #edit_form{
+      position: fixed;
+      z-index: 99;
+      top: 25vh;
+      left:50vw;
+      width: 30vw;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      display: none;
+    }
   </style>
   <div id="page1">
     <div id="top-header">
@@ -209,6 +219,33 @@
         </form>
       </div>
     </div>
+    <div id='edit_form'>
+      <form action="" method='post'>
+        {%csrf_token%}
+        <fieldset>
+          <legend>Edit Book</legend>
+          <input type="hidden" id="edit_book_id" name="book_id" value="" />
+          <label for="edit_title">Title: </label>
+          <input type="text" id="edit_title" name="title" required /><br /><br />
+          <label for="edit_author">Author:</label>
+          <input type="text" id="edit_author" name="author" required /><br /><br />
+          <label for="edit_type">Type: </label>
+          <select id="edit_type" name="type" required>
+            <option value="1">Fiction</option>
+            <option value="2">Stories/Nobels</option>
+            <option value="3">Calculations</option>
+            <option value="4">computer</option>
+            <option value="5" selected >Others</option> </select>
+          </select><br /><br />
+          <label for="edit_shelf">Shelf:</label>
+          <input type="text" id="edit_shelf" name="shelf" required /><br /><br />
+          <label for="edit_quantity">Quantity:</label>
+          <input type="number" id="edit_quantity" name="quantity" required /><br /><br />
+          <input type="submit" name="edit_book" value="Update Book" />
+        </fieldset>
+      </form>
+    </div>
+
     <button id="book-btn">Add Book</button>
     <div class="table-container">
       <table cellspacing="20" cellpadding="10">
@@ -233,7 +270,7 @@
               <td>{{ book.shelf }}</td>
               <td>{{ book.quantity }}</td>
               <td>
-                  <button class="Edit">
+                  <button class="Edit" data-book-id="{{ book.id }}">
                       <img src="/static/edit icon.png" alt="Edit" />
                   </button>
                   <form action="" method="post" style="display:inline;">
@@ -289,9 +326,7 @@
   const Bookbtn = document.querySelector("#book-btn");
   const submitBtn = document.querySelector("#submitbtn");
   const resetBtn = document.querySelector("#resetbtn");
-  const EditBtn = document.querySelectorAll(".Edit");
-  const DeleteBtn = document.querySelectorAll(".Delete");
-
+  
   displayForm();
   submitForm();
 
@@ -351,16 +386,29 @@
   }
 
   //for edit and delete operation
-   {% comment %} function editDeleteOperation(){
-    const bookList = document.querySelector("#book-list");
-    const bookItems = bookList.children;
-    Array.from(bookItems).forEach((bookItem) => {
-      const editButton = bookItem.querySelector(".edit");
-      const deleteButton = bookItem.querySelector(".delete");
+  document.addEventListener('DOMContentLoaded', function () {
+    const editBookButtons = document.querySelectorAll(".Edit");
+    const editBookForm = document.getElementById("edit_form");
 
-    }
+    editBookButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const bookId = this.dataset.bookId;
+            fetch(`/books/${bookId}/edit/`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("edit_book_id").value = data.id;
+                    document.getElementById("edit_title").value = data.title;
+                    document.getElementById("edit_author").value = data.author;
+                    document.getElementById("edit_type").value = data.type;
+                    document.getElementById("edit_shelf").value = data.shelf;
+                    document.getElementById("edit_quantity").value = data.quantity;
+                    editBookForm.style.display = 'block';
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    });
+});
 
-  } {% endcomment %}
       
 </script>
 

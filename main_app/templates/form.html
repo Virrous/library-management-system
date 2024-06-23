@@ -129,9 +129,10 @@
             type="password"
             name="pswd"
             placeholder="Password"
+            id='password'
             required=""
           />
-          <button class="button1" type="submit" name='register'>Sign up</button>
+          <button class="button1" type="submit" name='register' id='register'>Sign up</button>
         </form>
       </div>
 
@@ -140,7 +141,7 @@
           {% csrf_token %}
           <label for="chk">Login</label>
           <!-- aria-hidden="true" -->
-          <input type="text" name="login_username" placeholder="Email" required="" />
+          <input type="text" name="login_username" placeholder="username" required="" />
           <input
             type="password"
             name="password"
@@ -159,4 +160,17 @@
       </div>
     </div>
   </body>
+  <script>
+    const register=document.getElementById('register');
+    register.addEventListener('click',(e)=>{
+      const password=document.getElementById('password').value;
+      if(len(password)<8){
+        alert("Password must be at least 8 characters!");
+        e.preventDefault();
+      }
+      else{
+        alert('user created successfully!')
+      }
+    })
+  </script>
 </html>
